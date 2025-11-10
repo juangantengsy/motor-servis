@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sparepart — Dealer Motor</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- Navbar -->
+<nav class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between h-16 items-center">
+      <a href="index.html" class="text-2xl font-bold">Dealer Motor</a>
+      <div class="hidden md:flex space-x-4 items-center">
+        <a href="index.html" class="hover:text-blue-500">Dashboard</a>
+        <div class="relative">
+          <button onclick="toggleDropdown('servicesDropdown')" class="hover:text-blue-500 flex items-center">
+            Layanan
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="servicesDropdown" class="absolute left-0 mt-1 hidden bg-white border shadow-md rounded z-10">
+            <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Daftar Layanan</a>
+            <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Tambah Layanan</a>
+            <a href="promo.html" class="block px-4 py-2 hover:bg-gray-100">Promo & Paket</a>
+          </div>
+        </div>
+        <a href="booking.html" class="hover:text-blue-500">Booking</a>
+        <a href="spareparts.html" class="hover:text-blue-500">Sparepart</a>
+        <a href="customers.html" class="hover:text-blue-500">Pelanggan</a>
+        <a href="locations.html" class="hover:text-blue-500">Lokasi</a>
+        <a href="reports.html" class="hover:text-blue-500">Laporan</a>
+        <a href="settings.html" class="hover:text-blue-500">Pengaturan</a>
+      </div>
+      <div class="md:hidden">
+        <button id="menu-btn" class="focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+    <a href="index.html" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+    <button onclick="toggleDropdown('mobileServices')" class="w-full text-left px-4 py-2 hover:bg-gray-100 flex justify-between items-center">
+      Layanan
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+      </svg>
+    </button>
+    <div id="mobileServices" class="hidden flex-col">
+      <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Daftar Layanan</a>
+      <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Tambah Layanan</a>
+      <a href="promo.html" class="block px-8 py-2 hover:bg-gray-100">Promo & Paket</a>
+    </div>
+    <a href="booking.html" class="block px-4 py-2 hover:bg-gray-100">Booking</a>
+    <a href="spareparts.html" class="block px-4 py-2 hover:bg-gray-100">Sparepart</a>
+    <a href="customers.html" class="block px-4 py-2 hover:bg-gray-100">Pelanggan</a>
+    <a href="locations.html" class="block px-4 py-2 hover:bg-gray-100">Lokasi</a>
+    <a href="reports.html" class="block px-4 py-2 hover:bg-gray-100">Laporan</a>
+    <a href="settings.html" class="block px-4 py-2 hover:bg-gray-100">Pengaturan</a>
+  </div>
+</nav>
+
+<!-- Section Login Admin -->
+<section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-950 to-indigo-950 relative overflow-hidden">
+  <!-- Efek Background -->
+  <div class="absolute inset-0">
+    <div class="absolute w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl top-10 left-10 animate-pulse"></div>
+    <div class="absolute w-80 h-80 bg-blue-500/20 rounded-full blur-3xl bottom-10 right-10 animate-ping"></div>
+  </div>
+
+  <!-- Card Login -->
+  <div class="relative z-10 w-full max-w-md bg-white/10 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl p-10">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 mx-auto text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+      </svg>
+      <h2 class="text-3xl font-bold text-white mt-4">Login Admin Bengkel</h2>
+      <p class="text-gray-400 text-sm mt-2">Masuk ke sistem pengaturan & laporan internal</p>
+    </div>
+
+    <!-- Form -->
+    <form action="#" method="POST" class="space-y-6">
+      <!-- Username -->
+      <div>
+        <label for="username" class="block text-gray-300 font-medium mb-2">Username</label>
+        <div class="relative">
+          <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-3 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A4 4 0 0112 15h0a4 4 0 016.879 2.804M12 11a4 4 0 100-8 4 4 0 000 8z" />
+          </svg>
+          <input type="text" id="username" name="username" placeholder="Masukkan username" class="w-full bg-white/5 border border-gray-700 text-white rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-indigo-500 outline-none placeholder-gray-500">
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label for="password" class="block text-gray-300 font-medium mb-2">Password</label>
+        <div class="relative">
+          <svg xmlns="http://www.w3.org/2000/svg" class="absolute left-3 top-3 w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.105 0 2-.895 2-2V7a2 2 0 10-4 0v2c0 1.105.895 2 2 2zM5 11h14v10H5V11z" />
+          </svg>
+          <input type="password" id="password" name="password" placeholder="Masukkan password" class="w-full bg-white/5 border border-gray-700 text-white rounded-xl pl-10 pr-4 py-3 focus:ring-2 focus:ring-indigo-500 outline-none placeholder-gray-500">
+        </div>
+      </div>
+
+      <!-- Remember & Forgot -->
+      <div class="flex items-center justify-between text-gray-400 text-sm">
+        <label class="flex items-center gap-2">
+          <input type="checkbox" class="form-checkbox text-indigo-600 bg-gray-800 border-gray-700 rounded">
+          Ingat saya
+        </label>
+        <a href="#" class="hover:text-indigo-400 transition">Lupa password?</a>
+      </div>
+
+      <!-- Tombol Login -->
+      <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg hover:shadow-indigo-500/30">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M12 18a9 9 0 100-18 9 9 0 000 18z" />
+        </svg>
+        Masuk ke Pengaturan
+      </button>
+    </form>
+
+    <!-- Footer -->
+    <p class="text-gray-500 text-center text-sm mt-8">
+      © 2025 <span class="text-indigo-400 font-semibold">Bengkel Kelotok</span>. Semua Hak Dilindungi.
+    </p>
+  </div>
+</section>
+
+<!-- DASHBOARD PENGATURAN ADMIN -->
+<section class="min-h-screen flex bg-gray-950 text-white">
+  <!-- Sidebar -->
+  <aside class="w-72 bg-white/10 backdrop-blur-xl border-r border-white/10 p-6 flex flex-col">
+    <div class="flex items-center gap-3 mb-10">
+      <div class="bg-indigo-600 p-3 rounded-xl">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+        </svg>
+      </div>
+      <h2 class="text-xl font-bold">Admin Bengkel</h2>
+    </div>
+
+    <!-- Menu Navigasi -->
+    <nav class="flex-1 space-y-3">
+      <a href="#" class="flex items-center gap-3 p-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7h18M3 12h18M3 17h18" />
+        </svg>
+        Dashboard
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+        </svg>
+        Laporan
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V13a6.002 6.002 0 00-9.33-5.197M9 17h.01" />
+        </svg>
+        Notifikasi
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Promo
+      </a>
+      <a href="#" class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/10 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5h10M11 9h10M11 13h10M11 17h10M4 5h.01M4 9h.01M4 13h.01M4 17h.01" />
+        </svg>
+        Pengaturan
+      </a>
+    </nav>
+
+    <!-- Logout -->
+    <button class="mt-auto bg-red-600 hover:bg-red-700 px-4 py-3 rounded-xl flex items-center gap-2 transition-all">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
+      </svg>
+      Logout
+    </button>
+  </aside>
+
+  <!-- Konten Utama -->
+  <main class="flex-1 p-10">
+    <!-- Header Dashboard -->
+    <div class="flex items-center justify-between mb-10">
+      <h1 class="text-3xl font-bold">Panel Pengaturan</h1>
+      <div class="flex items-center gap-4">
+        <div class="text-right">
+          <p class="text-sm text-gray-400">Selamat datang,</p>
+          <p class="font-semibold text-white">Admin Kelotok</p>
+        </div>
+        <img src="https://ui-avatars.com/api/?name=Admin+Kelotok&background=4f46e5&color=fff" alt="Admin" class="w-12 h-12 rounded-full border-2 border-indigo-600">
+      </div>
+    </div>
+
+    <!-- Cards Pengaturan -->
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+      <!-- Card 1 -->
+      <div class="bg-white/10 border border-white/10 backdrop-blur-xl p-6 rounded-2xl hover:shadow-indigo-500/20 transition">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-semibold">Edit Layanan</h3>
+          <div class="bg-indigo-600 p-2 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+            </svg>
+          </div>
+        </div>
+        <p class="text-gray-400 text-sm mb-4">Kelola jenis servis & biaya di halaman utama.</p>
+        <button class="bg-indigo-600 hover:bg-indigo-700 px-5 py-2 rounded-lg text-sm font-medium">Buka Pengaturan</button>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white/10 border border-white/10 backdrop-blur-xl p-6 rounded-2xl hover:shadow-green-500/20 transition">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-semibold">Kelola Promo</h3>
+          <div class="bg-green-600 p-2 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m0 0H9m6 0H9" />
+            </svg>
+          </div>
+        </div>
+        <p class="text-gray-400 text-sm mb-4">Tambah, hapus, atau ubah promo pelanggan.</p>
+        <button class="bg-green-600 hover:bg-green-700 px-5 py-2 rounded-lg text-sm font-medium">Atur Promo</button>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white/10 border border-white/10 backdrop-blur-xl p-6 rounded-2xl hover:shadow-yellow-500/20 transition">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-semibold">Manajemen User</h3>
+          <div class="bg-yellow-500 p-2 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M12 4a4 4 0 110 8 4 4 0 010-8z" />
+            </svg>
+          </div>
+        </div>
+        <p class="text-gray-400 text-sm mb-4">Lihat dan atur akses user admin & karyawan.</p>
+        <button class="bg-yellow-500 hover:bg-yellow-600 px-5 py-2 rounded-lg text-sm font-medium">Kelola User</button>
+      </div>
+    </div>
+  </main>
+</section>
+
+
+<section class="max-w-7xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Pengaturan</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <h2 class="font-semibold text-lg">Profil Dealer</h2>
+      <p class="text-gray-600 mt-2">Ubah nama, logo, dan informasi dealer.</p>
+      <button class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Edit Profil</button>
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <h2 class="font-semibold text-lg">Pengaturan User</h2>
+      <p class="text-gray-600 mt-2">Atur akses admin dan staff.</p>
+      <button class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Kelola User</button>
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <h2 class="font-semibold text-lg">Notifikasi</h2>
+      <p class="text-gray-600 mt-2">Aktifkan atau nonaktifkan notifikasi booking dan layanan.</p>
+      <button class="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Atur Notifikasi</button>
+    </div>
+  </div>
+</section>
+
+<script>
+const btn = document.getElementById('menu-btn');
+const menu = document.getElementById('mobile-menu');
+btn.addEventListener('click', ()=>menu.classList.toggle('hidden'));
+function toggleDropdown(id){ document.getElementById(id).classList.toggle('hidden'); }
+</script>
+<script>
+// === LOGIN HANDLER ===
+const loginForm = document.querySelector('form');
+const loginSection = document.querySelector('.min-h-screen.flex.items-center'); // section login
+const dashboardSection = document.querySelector('section.min-h-screen.flex.bg-gray-950'); // dashboard pengaturan
+
+// Sembunyikan dashboard dulu
+dashboardSection.style.display = 'none';
+
+// Ketika login ditekan
+loginForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+
+  // --- Validasi sederhana ---
+  if (username === 'admin' && password === '12345') {
+    // Login sukses
+    alert('Login berhasil! Selamat datang, Admin.');
+
+    // Sembunyikan form login
+    loginSection.style.display = 'none';
+
+    // Tampilkan dashboard pengaturan
+    dashboardSection.style.display = 'flex';
+  } else {
+    alert('Username atau password salah. Coba lagi!');
+  }
+});
+</script>
+
+</body>
+</html>

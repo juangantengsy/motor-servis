@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sparepart — Dealer Motor</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- Navbar -->
+<nav class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between h-16 items-center">
+      <a href="index.html" class="text-2xl font-bold">Dealer Motor</a>
+      <div class="hidden md:flex space-x-4 items-center">
+        <a href="index.html" class="hover:text-blue-500">Dashboard</a>
+        <div class="relative">
+          <button onclick="toggleDropdown('servicesDropdown')" class="hover:text-blue-500 flex items-center">
+            Layanan
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="servicesDropdown" class="absolute left-0 mt-1 hidden bg-white border shadow-md rounded z-10">
+            <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Daftar Layanan</a>
+            <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Tambah Layanan</a>
+            <a href="promo.html" class="block px-4 py-2 hover:bg-gray-100">Promo & Paket</a>
+          </div>
+        </div>
+        <a href="booking.html" class="hover:text-blue-500">Booking</a>
+        <a href="spareparts.html" class="hover:text-blue-500">Sparepart</a>
+        <a href="customers.html" class="hover:text-blue-500">Pelanggan</a>
+        <a href="locations.html" class="hover:text-blue-500">Lokasi</a>
+        <a href="reports.html" class="hover:text-blue-500">Laporan</a>
+        <a href="settings.html" class="hover:text-blue-500">Pengaturan</a>
+      </div>
+      <div class="md:hidden">
+        <button id="menu-btn" class="focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+    <a href="index.html" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+    <button onclick="toggleDropdown('mobileServices')" class="w-full text-left px-4 py-2 hover:bg-gray-100 flex justify-between items-center">
+      Layanan
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+      </svg>
+    </button>
+    <div id="mobileServices" class="hidden flex-col">
+      <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Daftar Layanan</a>
+      <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Tambah Layanan</a>
+      <a href="promo.html" class="block px-8 py-2 hover:bg-gray-100">Promo & Paket</a>
+    </div>
+    <a href="booking.html" class="block px-4 py-2 hover:bg-gray-100">Booking</a>
+    <a href="spareparts.html" class="block px-4 py-2 hover:bg-gray-100">Sparepart</a>
+    <a href="customers.html" class="block px-4 py-2 hover:bg-gray-100">Pelanggan</a>
+    <a href="locations.html" class="block px-4 py-2 hover:bg-gray-100">Lokasi</a>
+    <a href="reports.html" class="block px-4 py-2 hover:bg-gray-100">Laporan</a>
+    <a href="settings.html" class="block px-4 py-2 hover:bg-gray-100">Pengaturan</a>
+  </div>
+</nav>
+
+<section class="max-w-3xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Tambah Layanan Baru</h1>
+  <form class="bg-white shadow-md rounded px-8 py-6">
+    <div class="mb-4">
+      <label class="block text-gray-700 font-semibold mb-2">Nama Layanan</label>
+      <input type="text" placeholder="Servis Berkala" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-semibold mb-2">Deskripsi</label>
+      <textarea placeholder="Deskripsi layanan..." class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+    </div>
+    <div class="mb-4">
+      <label class="block text-gray-700 font-semibold mb-2">Harga (Rp)</label>
+      <input type="number" placeholder="100000" class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+    </div>
+    <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Simpan Layanan</button>
+  </form>
+</section>
+
+
+<script>
+const btn = document.getElementById('menu-btn');
+const menu = document.getElementById('mobile-menu');
+btn.addEventListener('click', ()=>menu.classList.toggle('hidden'));
+function toggleDropdown(id){ document.getElementById(id).classList.toggle('hidden'); }
+</script>
+</body>
+</html>

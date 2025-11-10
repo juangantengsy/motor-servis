@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking — Dealer Motor</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- Navbar -->
+<nav class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between h-16 items-center">
+      <a href="index.html" class="text-2xl font-bold">Dealer Motor</a>
+      <div class="hidden md:flex space-x-4 items-center">
+        <a href="index.html" class="hover:text-blue-500">Dashboard</a>
+        <div class="relative">
+          <button onclick="toggleDropdown('servicesDropdown')" class="hover:text-blue-500 flex items-center">
+            Layanan
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="servicesDropdown" class="absolute left-0 mt-1 hidden bg-white border shadow-md rounded z-10">
+            <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Daftar Layanan</a>
+            <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Tambah Layanan</a>
+            <a href="promo.html" class="block px-4 py-2 hover:bg-gray-100">Promo & Paket</a>
+          </div>
+        </div>
+        <a href="booking.html" class="hover:text-blue-500">Booking</a>
+        <a href="spareparts.html" class="hover:text-blue-500">Sparepart</a>
+        <a href="customers.html" class="hover:text-blue-500">Pelanggan</a>
+        <a href="locations.html" class="hover:text-blue-500">Lokasi</a>
+        <a href="reports.html" class="hover:text-blue-500">Laporan</a>
+        <a href="settings.html" class="hover:text-blue-500">Pengaturan</a>
+      </div>
+      <div class="md:hidden">
+        <button id="menu-btn" class="focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+    <a href="index.html" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+    <button onclick="toggleDropdown('mobileServices')" class="w-full text-left px-4 py-2 hover:bg-gray-100 flex justify-between items-center">
+      Layanan
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+      </svg>
+    </button>
+    <div id="mobileServices" class="hidden flex-col">
+      <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Daftar Layanan</a>
+      <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Tambah Layanan</a>
+      <a href="promo.html" class="block px-8 py-2 hover:bg-gray-100">Promo & Paket</a>
+    </div>
+    <a href="booking.html" class="block px-4 py-2 hover:bg-gray-100">Booking</a>
+    <a href="spareparts.html" class="block px-4 py-2 hover:bg-gray-100">Sparepart</a>
+    <a href="customers.html" class="block px-4 py-2 hover:bg-gray-100">Pelanggan</a>
+    <a href="locations.html" class="block px-4 py-2 hover:bg-gray-100">Lokasi</a>
+    <a href="reports.html" class="block px-4 py-2 hover:bg-gray-100">Laporan</a>
+    <a href="settings.html" class="block px-4 py-2 hover:bg-gray-100">Pengaturan</a>
+  </div>
+</nav>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-6">Menu Booking Servis</h2>
+
+  <!-- TOP BOOKING BUTTON -->
+  <div class="mb-8 p-6 bg-blue-600 text-white rounded-xl shadow flex flex-col md:flex-row justify-between items-center gap-4">
+    <div>
+      <h3 class="text-xl font-semibold">Buat Booking Servis Cepat</h3>
+      <p class="text-white/80 mt-1">Hemat waktu tanpa antre — cukup isi data singkat.</p>
+    </div>
+
+    <a href="booking.html" class="px-6 py-3 bg-white text-blue-700 font-semibold rounded shadow hover:bg-gray-200 transition">
+      Booking Sekarang
+    </a>
+  </div>
+
+  <!-- SEARCH BAR -->
+  <div class="mb-10">
+    <input 
+      type="text"
+      placeholder="Cari nama pelanggan / motor / layanan…"
+      class="w-full p-3 border border-gray-300 rounded-lg shadow focus:ring-2 focus:ring-blue-500"
+    >
+  </div>
+
+  <!-- BOOKING STATUS CARD GRID -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <h3 class="text-lg font-semibold">Booking Hari Ini</h3>
+      <p class="text-4xl font-bold text-blue-600 mt-3">12</p>
+      <p class="text-gray-600 mt-1">Jumlah pelanggan yang sudah booking hari ini.</p>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <h3 class="text-lg font-semibold">Booking Minggu Ini</h3>
+      <p class="text-4xl font-bold text-green-600 mt-3">54</p>
+      <p class="text-gray-600 mt-1">Total booking minggu berjalan.</p>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <h3 class="text-lg font-semibold">Teknisi Tersedia</h3>
+      <p class="text-4xl font-bold text-yellow-600 mt-3">7</p>
+      <p class="text-gray-600 mt-1">Teknisi siap melayani servis motor Anda.</p>
+    </div>
+
+  </div>
+
+  <!-- TABLE BOOKING -->
+  <h3 class="text-xl font-bold mb-4">Daftar Booking Terbaru</h3>
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+      <thead class="bg-gray-100 text-left">
+        <tr>
+          <th class="px-4 py-2 border-b">Nama</th>
+          <th class="px-4 py-2 border-b">Motor</th>
+          <th class="px-4 py-2 border-b">Layanan</th>
+          <th class="px-4 py-2 border-b">Tanggal</th>
+          <th class="px-4 py-2 border-b">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-2 border-b">Rudi Santoso</td>
+          <td class="px-4 py-2 border-b">Honda Beat</td>
+          <td class="px-4 py-2 border-b">Servis Berkala</td>
+          <td class="px-4 py-2 border-b">2025-11-12</td>
+          <td class="px-4 py-2 border-b">
+            <span class="text-green-600 font-semibold">Selesai</span>
+          </td>
+        </tr>
+
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-2 border-b">Siti Aminah</td>
+          <td class="px-4 py-2 border-b">Yamaha NMAX</td>
+          <td class="px-4 py-2 border-b">Ganti Ban</td>
+          <td class="px-4 py-2 border-b">2025-11-13</td>
+          <td class="px-4 py-2 border-b">
+            <span class="text-yellow-600 font-semibold">Proses</span>
+          </td>
+        </tr>
+
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-2 border-b">Budi Hartono</td>
+          <td class="px-4 py-2 border-b">Suzuki GSX</td>
+          <td class="px-4 py-2 border-b">Servis Rem</td>
+          <td class="px-4 py-2 border-b">2025-11-14</td>
+          <td class="px-4 py-2 border-b">
+            <span class="text-red-600 font-semibold">Pending</span>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-6">Teknisi Bertugas Hari Ini</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition flex items-center gap-4">
+      <img src="assets/images/teknisi1.jpg" class="w-16 h-16 rounded-full object-cover">
+      <div>
+        <h3 class="font-semibold text-lg">Andi Putra</h3>
+        <p class="text-gray-600 text-sm">Spesialis Mesin</p>
+      </div>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition flex items-center gap-4">
+      <img src="assets/images/teknisi2.jpg" class="w-16 h-16 rounded-full object-cover">
+      <div>
+        <h3 class="font-semibold text-lg">Rudi Hartanto</h3>
+        <p class="text-gray-600 text-sm">Kelistrikan & ECU</p>
+      </div>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition flex items-center gap-4">
+      <img src="assets/images/teknisi3.jpg" class="w-16 h-16 rounded-full object-cover">
+      <div>
+        <h3 class="font-semibold text-lg">Danu Saputra</h3>
+        <p class="text-gray-600 text-sm">Body & Cat</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12 bg-gray-50 rounded-xl shadow">
+  <h2 class="text-2xl font-bold mb-6">Grafik Booking Mingguan</h2>
+
+  <div class="space-y-4">
+
+    <div>
+      <p class="text-gray-600 font-semibold">Senin — 32 Booking</p>
+      <div class="h-3 bg-blue-600 rounded w-[70%]"></div>
+    </div>
+
+    <div>
+      <p class="text-gray-600 font-semibold">Selasa — 28 Booking</p>
+      <div class="h-3 bg-blue-600 rounded w-[62%]"></div>
+    </div>
+
+    <div>
+      <p class="text-gray-600 font-semibold">Rabu — 45 Booking</p>
+      <div class="h-3 bg-blue-600 rounded w-[90%]"></div>
+    </div>
+
+    <div>
+      <p class="text-gray-600 font-semibold">Kamis — 36 Booking</p>
+      <div class="h-3 bg-blue-600 rounded w-[75%]"></div>
+    </div>
+
+    <div>
+      <p class="text-gray-600 font-semibold">Jumat — 50 Booking</p>
+      <div class="h-3 bg-blue-600 rounded w-[100%]"></div>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-6">Booking Berdasarkan Layanan</h2>
+
+  <div class="flex gap-3 mb-6 overflow-x-auto">
+    <button class="px-4 py-2 bg-blue-600 text-white rounded shadow">Semua</button>
+    <button class="px-4 py-2 border rounded">Servis Berkala</button>
+    <button class="px-4 py-2 border rounded">Ban & Rem</button>
+    <button class="px-4 py-2 border rounded">Body & Cat</button>
+    <button class="px-4 py-2 border rounded">Kelistrikan</button>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <h3 class="font-semibold text-lg">Servis Berkala</h3>
+      <p class="text-gray-600 mt-2">45 Booking minggu ini</p>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <h3 class="font-semibold text-lg">Ganti Ban</h3>
+      <p class="text-gray-600 mt-2">32 Booking minggu ini</p>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <h3 class="font-semibold text-lg">Servis Rem</h3>
+      <p class="text-gray-600 mt-2">28 Booking minggu ini</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="px-4 py-20 bg-gray-900 text-white rounded-xl shadow mt-12">
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-4">VIP Booking Priority</h2>
+    <p class="text-gray-300 mb-6">
+      Dapatkan prioritas antrian, teknisi khusus, dan ruang tunggu premium.
+    </p>
+    <button class="px-6 py-3 bg-blue-600 rounded shadow hover:bg-blue-700">
+      Daftar VIP Sekarang
+    </button>
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-6">Slot Booking Tersedia Hari Ini</h2>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+    <div class="p-4 bg-green-100 border border-green-300 rounded-lg text-center">
+      <p class="text-2xl font-bold text-green-700">08:00</p>
+      <p class="text-sm font-semibold text-green-800">Tersedia</p>
+    </div>
+
+    <div class="p-4 bg-red-100 border border-red-300 rounded-lg text-center">
+      <p class="text-2xl font-bold text-red-700">09:00</p>
+      <p class="text-sm font-semibold text-red-800">Penuh</p>
+    </div>
+
+    <div class="p-4 bg-green-100 border border-green-300 rounded-lg text-center">
+      <p class="text-2xl font-bold text-green-700">10:00</p>
+      <p class="text-sm font-semibold text-green-800">Tersedia</p>
+    </div>
+
+    <div class="p-4 bg-red-100 border border-red-300 rounded-lg text-center">
+      <p class="text-2xl font-bold text-red-700">11:00</p>
+      <p class="text-sm font-semibold text-red-800">Penuh</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12 bg-gray-50 rounded-xl shadow">
+  <h2 class="text-2xl font-bold mb-6">Riwayat Booking Pelanggan</h2>
+
+  <div class="space-y-4">
+
+    <div class="p-4 bg-white border rounded-lg shadow flex justify-between items-center">
+      <div>
+        <h3 class="font-semibold">Servis Rem</h3>
+        <p class="text-gray-600 text-sm">Tanggal: 2025-11-05</p>
+      </div>
+      <span class="text-green-600 font-semibold">Selesai</span>
+    </div>
+
+    <div class="p-4 bg-white border rounded-lg shadow flex justify-between items-center">
+      <div>
+        <h3 class="font-semibold">Ganti Ban</h3>
+        <p class="text-gray-600 text-sm">Tanggal: 2025-11-03</p>
+      </div>
+      <span class="text-yellow-600 font-semibold">Proses</span>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-6">FAQ Booking</h2>
+
+  <div class="space-y-4">
+
+    <div class="p-4 bg-white border rounded-lg shadow">
+      <h3 class="font-semibold text-lg">Apakah wajib booking sebelum servis?</h3>
+      <p class="text-gray-600 mt-1">Tidak wajib, namun booking menghindari antre panjang.</p>
+    </div>
+
+    <div class="p-4 bg-white border rounded-lg shadow">
+      <h3 class="font-semibold text-lg">Apa bisa reschedule booking?</h3>
+      <p class="text-gray-600 mt-1">Bisa, cukup hubungi admin WhatsApp.</p>
+    </div>
+
+    <div class="p-4 bg-white border rounded-lg shadow">
+      <h3 class="font-semibold text-lg">Berapa lama durasi servis?</h3>
+      <p class="text-gray-600 mt-1">30–90 menit tergantung layanan.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-xl shadow mb-16">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+
+    <div>
+      <h2 class="text-3xl font-bold mb-3">Promo Booking Bulan Ini</h2>
+      <p class="text-white/80 mb-6">
+        Dapatkan diskon khusus hingga 25% jika melakukan booking servis motor secara online.
+        Berlaku untuk 3 layanan pilihan.
+      </p>
+
+      <ul class="space-y-2 text-white/90">
+        <li>✔ Diskon 20% Servis Berkala</li>
+        <li>✔ Diskon 10% Ganti Ban Premium</li>
+        <li>✔ Diskon 25% Tune Up Full</li>
+      </ul>
+
+      <a href="booking.html" class="inline-block mt-6 px-6 py-3 bg-white text-blue-700 font-semibold rounded shadow hover:bg-gray-200">
+        Booking Sekarang
+      </a>
+    </div>
+
+    <img src="assets/images/promo-servis.png" class="w-full rounded-lg shadow-lg">
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-6">Pilih Cabang Dealer</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="p-6 border rounded-lg shadow bg-white hover:shadow-xl transition">
+      <h3 class="text-xl font-semibold">Cabang Jakarta Pusat</h3>
+      <p class="text-gray-600 mt-2">Jl. Merdeka No. 45</p>
+      <button class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Pilih</button>
+    </div>
+
+    <div class="p-6 border rounded-lg shadow bg-white hover:shadow-xl transition">
+      <h3 class="text-xl font-semibold">Cabang Jakarta Barat</h3>
+      <p class="text-gray-600 mt-2">Jl. Anggrek No. 21</p>
+      <button class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Pilih</button>
+    </div>
+
+    <div class="p-6 border rounded-lg shadow bg-white hover:shadow-xl transition">
+      <h3 class="text-xl font-semibold">Cabang Bekasi</h3>
+      <p class="text-gray-600 mt-2">Jl. Cikarang Raya No. 12</p>
+      <button class="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Pilih</button>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-16 bg-gray-50 rounded-xl shadow">
+  <h2 class="text-2xl font-bold mb-6">Testimoni Pelanggan Booking</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <p class="text-gray-700 italic">“Booking online sangat memudahkan, tidak perlu antre lama.”</p>
+      <div class="mt-4">
+        <p class="font-semibold">Rina Oktavia</p>
+        <p class="text-sm text-gray-500">Servis Berkala</p>
+      </div>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <p class="text-gray-700 italic">“Teknisi datang tepat waktu, pengerjaan cepat dan rapi.”</p>
+      <div class="mt-4">
+        <p class="font-semibold">Bambang Satria</p>
+        <p class="text-sm text-gray-500">Ganti Ban</p>
+      </div>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <p class="text-gray-700 italic">“Booking VIP mantap! Langsung ditangani tanpa nunggu.”</p>
+      <div class="mt-4">
+        <p class="font-semibold">Ivan Setiawan</p>
+        <p class="text-sm text-gray-500">VIP Priority</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-16">
+  <h2 class="text-2xl font-bold mb-6">Booking via WhatsApp</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+
+    <div>
+      <p class="text-gray-600 mb-3">
+        Booking cepat melalui WhatsApp — cukup klik tombol di bawah atau scan QR.
+      </p>
+
+      <a href="https://wa.me/6281290000000" class="px-6 py-3 bg-green-600 text-white rounded shadow hover:bg-green-700">
+        Chat WhatsApp
+      </a>
+    </div>
+
+    <div class="flex justify-center">
+      <div class="p-4 bg-white border rounded-lg shadow w-40 h-40 flex items-center justify-center">
+        <img src="assets/images/qr-booking.png" class="w-full h-full object-contain">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12 bg-gray-50 rounded-xl shadow">
+  <h2 class="text-2xl font-bold mb-6">Estimasi Harga Servis</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="p-6 bg-white border rounded-lg shadow">
+      <h3 class="text-lg font-semibold mb-2">Ganti Oli</h3>
+      <p class="text-blue-600 font-bold text-xl">Rp 50.000 – 85.000</p>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow">
+      <h3 class="text-lg font-semibold mb-2">Servis Berkala</h3>
+      <p class="text-blue-600 font-bold text-xl">Rp 80.000 – 150.000</p>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow">
+      <h3 class="text-lg font-semibold mb-2">Tune Up Lengkap</h3>
+      <p class="text-blue-600 font-bold text-xl">Rp 150.000 – 350.000</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-16">
+  <h2 class="text-2xl font-bold mb-6">Form Booking Lanjutan</h2>
+
+  <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <input type="text" placeholder="Nama Lengkap"
+      class="p-3 border rounded-lg focus:ring-2 focus:ring-blue-600">
+
+    <input type="text" placeholder="No. WhatsApp"
+      class="p-3 border rounded-lg focus:ring-2 focus:ring-blue-600">
+
+    <input type="text" placeholder="Jenis Motor"
+      class="p-3 border rounded-lg focus:ring-2 focus:ring-blue-600">
+
+    <select class="p-3 border rounded-lg focus:ring-2 focus:ring-blue-600">
+      <option>Pilih Layanan…</option>
+      <option>Servis Berkala</option>
+      <option>Ganti Ban</option>
+      <option>Servis Rem</option>
+      <option>Tune Up</option>
+    </select>
+
+    <input type="date" class="p-3 border rounded-lg focus:ring-2 focus:ring-blue-600">
+
+    <input type="time" class="p-3 border rounded-lg focus:ring-2 focus:ring-blue-600">
+
+    <textarea placeholder="Keluhan / Catatan Motor"
+      class="md:col-span-2 p-3 border rounded-lg focus:ring-2 focus:ring-blue-600"></textarea>
+
+    <button class="md:col-span-2 px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
+      Kirim Booking
+    </button>
+
+  </form>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-16 bg-gray-100 rounded-xl shadow">
+  <h2 class="text-2xl font-bold mb-6">Proses Booking</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+
+    <div class="p-6 bg-white rounded-xl shadow">
+      <div class="text-blue-600 text-3xl font-bold">1</div>
+      <h3 class="font-semibold mt-2">Pilih Layanan</h3>
+      <p class="text-gray-600 text-sm mt-1">Pilih jenis servis motor.</p>
+    </div>
+
+    <div class="p-6 bg-white rounded-xl shadow">
+      <div class="text-blue-600 text-3xl font-bold">2</div>
+      <h3 class="font-semibold mt-2">Isi Data Motor</h3>
+      <p class="text-gray-600 text-sm mt-1">Lengkapi data dan keluhan.</p>
+    </div>
+
+    <div class="p-6 bg-white rounded-xl shadow">
+      <div class="text-blue-600 text-3xl font-bold">3</div>
+      <h3 class="font-semibold mt-2">Pilih Tanggal</h3>
+      <p class="text-gray-600 text-sm mt-1">Tentukan hari kedatangan.</p>
+    </div>
+
+    <div class="p-6 bg-white rounded-xl shadow">
+      <div class="text-blue-600 text-3xl font-bold">4</div>
+      <h3 class="font-semibold mt-2">Konfirmasi</h3>
+      <p class="text-gray-600 text-sm mt-1">Booking selesai & terdaftar.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-16">
+  <h2 class="text-2xl font-bold mb-6">Jadwal Teknisi Hari Ini</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <!-- SHIFT PAGI -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <h3 class="font-semibold text-lg mb-3">Shift Pagi</h3>
+      <p class="text-gray-600">08:00 - 12:00</p>
+      <ul class="mt-3 text-gray-600">
+        <li>• Andi – Mesin</li>
+        <li>• Rudi – Kelistrikan</li>
+      </ul>
+    </div>
+
+    <!-- SHIFT SIANG -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <h3 class="font-semibold text-lg mb-3">Shift Siang</h3>
+      <p class="text-gray-600">12:30 - 16:30</p>
+      <ul class="mt-3 text-gray-600">
+        <li>• Danu – Body & Cat</li>
+        <li>• Ivan – Injektor</li>
+      </ul>
+    </div>
+
+    <!-- SHIFT MALAM -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <h3 class="font-semibold text-lg mb-3">Shift Malam</h3>
+      <p class="text-gray-600">16:45 - 20:00</p>
+      <ul class="mt-3 text-gray-600">
+        <li>• Bima – Rem</li>
+        <li>• Adit – Ban & Velg</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-4">Slot Booking Hari Ini</h2>
+
+  <div id="slotContainer" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+
+  <script>
+    const slots = [
+      { time: "08:00", status: "available" },
+      { time: "09:00", status: "full" },
+      { time: "10:00", status: "available" },
+      { time: "11:00", status: "full" },
+      { time: "12:00", status: "available" },
+      { time: "13:00", status: "available" },
+      { time: "14:00", status: "full" },
+      { time: "15:00", status: "available" },
+    ];
+
+    const slotContainer = document.getElementById("slotContainer");
+
+    slots.forEach(s => {
+      const div = document.createElement("div");
+      div.className = `p-4 text-center rounded-lg cursor-pointer border shadow
+        ${s.status === "available" ? "bg-green-100 border-green-400" : "bg-red-100 border-red-400"}`;
+      
+      div.innerHTML = `
+        <p class="text-2xl font-bold ${s.status === "available" ? "text-green-700" : "text-red-700"}">${s.time}</p>
+        <p class="text-sm font-semibold">${s.status === "available" ? "Tersedia" : "Penuh"}</p>
+      `;
+      
+      if (s.status === "available") {
+        div.onclick = () => alert("Slot dipilih: " + s.time);
+      }
+
+      slotContainer.appendChild(div);
+    });
+  </script>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12 bg-gray-50 rounded-xl shadow">
+  <h2 class="text-2xl font-bold mb-6">Estimasi Harga Otomatis</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <select id="layananSelect" class="p-3 border rounded-lg">
+      <option value="">Pilih Layanan…</option>
+      <option value="80000">Servis Berkala</option>
+      <option value="50000">Ganti Oli</option>
+      <option value="150000">Tune Up</option>
+      <option value="120000">Servis Rem</option>
+    </select>
+
+    <input id="hargaOutput" type="text" disabled
+      class="p-3 border rounded-lg bg-white font-semibold">
+
+  </div>
+
+  <script>
+    const layananSelect = document.getElementById("layananSelect");
+    const hargaOutput = document.getElementById("hargaOutput");
+
+    layananSelect.onchange = () => {
+      hargaOutput.value = layananSelect.value ? "Rp " + Number(layananSelect.value).toLocaleString() : "";
+    }
+  </script>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-16">
+  <h2 class="text-2xl font-bold mb-6">Form Booking Aktif</h2>
+
+  <form id="formBooking" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <input id="nama" type="text" placeholder="Nama Lengkap"
+      class="p-3 border rounded-lg" required>
+
+    <input id="wa" type="text" placeholder="No. WhatsApp"
+      class="p-3 border rounded-lg" required>
+
+    <input id="motor" type="text" placeholder="Jenis Motor"
+      class="p-3 border rounded-lg">
+
+    <select id="layanan" class="p-3 border rounded-lg" required>
+      <option value="">Pilih Layanan…</option>
+      <option>Servis Berkala</option>
+      <option>Ganti Ban</option>
+      <option>Servis Rem</option>
+    </select>
+
+    <input id="tanggal" type="date" class="p-3 border rounded-lg" required>
+    <input id="jam" type="time" class="p-3 border rounded-lg" required>
+
+    <textarea id="catatan" placeholder="Keluhan Motor"
+      class="md:col-span-2 p-3 border rounded-lg"></textarea>
+
+    <button class="md:col-span-2 px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
+      Kirim Booking
+    </button>
+  </form>
+
+  <div id="notif" class="hidden mt-6 p-4 bg-green-100 text-green-700 border border-green-300 rounded-lg">
+    Booking berhasil dikirim!
+  </div>
+
+  <script>
+    document.getElementById("formBooking").onsubmit = function(e) {
+      e.preventDefault();
+      document.getElementById("notif").classList.remove("hidden");
+    }
+  </script>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-4">Booking via WhatsApp Otomatis</h2>
+
+  <div>
+    <button onclick="kirimWa()" class="px-6 py-3 bg-green-600 text-white rounded shadow hover:bg-green-700">
+      Booking via WhatsApp
+    </button>
+  </div>
+
+  <script>
+    function kirimWa() {
+      let nama = prompt('Nama Anda:');
+      let motor = prompt('Jenis Motor:');
+      let layanan = prompt('Layanan yang diinginkan:');
+
+      let pesan = `Halo Admin, saya ingin booking servis.\n\nNama: ${nama}\nMotor: ${motor}\nLayanan: ${layanan}`;
+
+      window.open(`https://wa.me/6281290000000?text=${encodeURIComponent(pesan)}`);
+    }
+  </script>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-16 bg-gray-50 rounded-xl shadow">
+  <h2 class="text-2xl font-bold mb-6">Tracking Status Booking</h2>
+
+  <input id="kode" type="text" placeholder="Masukkan Kode Booking"
+    class="p-3 border rounded-lg w-full mb-4">
+
+  <button onclick="cekStatus()" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow">
+    Cek Status
+  </button>
+
+  <p id="statusOutput" class="mt-4 text-lg font-semibold"></p>
+
+  <script>
+    function cekStatus() {
+      const kode = document.getElementById("kode").value;
+      const statusOutput = document.getElementById("statusOutput");
+
+      if (kode === "A123") statusOutput.textContent = "Status: Selesai ✅";
+      else if (kode === "B777") statusOutput.textContent = "Status: Sedang Dikerjakan 🔧";
+      else statusOutput.textContent = "Kode booking tidak ditemukan ❌";
+    }
+  </script>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-6">Filter Layanan</h2>
+
+  <div class="flex gap-3 mb-6">
+    <button onclick="filterLayanan('all')" class="px-4 py-2 bg-blue-600 text-white rounded">Semua</button>
+    <button onclick="filterLayanan('mesin')" class="px-4 py-2 border rounded">Mesin</button>
+    <button onclick="filterLayanan('ban')" class="px-4 py-2 border rounded">Ban</button>
+    <button onclick="filterLayanan('body')" class="px-4 py-2 border rounded">Body</button>
+  </div>
+
+  <div id="listLayanan" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="p-6 border rounded shadow layanan mesin">Servis Berkala</div>
+    <div class="p-6 border rounded shadow layanan ban">Ganti Ban</div>
+    <div class="p-6 border rounded shadow layanan mesin">Tune Up</div>
+    <div class="p-6 border rounded shadow layanan body">Body Repair</div>
+    <div class="p-6 border rounded shadow layanan ban">Servis Rem</div>
+
+  </div>
+
+  <script>
+    function filterLayanan(c) {
+      const items = document.querySelectorAll(".layanan");
+      items.forEach(el => {
+        el.style.display = (c === "all" || el.classList.contains(c)) ? "block" : "none";
+      });
+    }
+  </script>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-6">Kalender Booking</h2>
+
+  <input id="kalender" type="date" class="p-3 border rounded-lg">
+
+  <script>
+    const kal = document.getElementById("kalender");
+    const today = new Date().toISOString().split("T")[0];
+    kal.value = today;
+    kal.min = today;
+  </script>
+</section>
+
+<section class="p-4 bg-white shadow rounded-xl mb-6">
+  <h2 class="text-xl font-semibold mb-3">Riwayat Servis Motor</h2>
+
+  <div class="overflow-x-auto">
+    <table class="w-full text-left border-collapse">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="p-3">Tanggal</th>
+          <th class="p-3">Nama Pelanggan</th>
+          <th class="p-3">Jenis Servis</th>
+          <th class="p-3">Biaya</th>
+          <th class="p-3">Status</th>
+        </tr>
+      </thead>
+      <tbody id="riwayatBody">
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script>
+const riwayatData = [
+  { tgl:"10/11/2025", nama:"Budi", servis:"Ganti Oli", biaya:50000, status:"Selesai" },
+  { tgl:"08/11/2025", nama:"Rian", servis:"Servis Ringan", biaya:90000, status:"Selesai" },
+  { tgl:"06/11/2025", nama:"Doni", servis:"Servis Besar", biaya:250000, status:"Pending" },
+];
+
+function loadRiwayat(){
+  const body = document.getElementById("riwayatBody");
+  body.innerHTML = riwayatData.map(r=>`
+    <tr class="border-b">
+      <td class="p-3">${r.tgl}</td>
+      <td class="p-3">${r.nama}</td>
+      <td class="p-3">${r.servis}</td>
+      <td class="p-3">Rp ${r.biaya.toLocaleString()}</td>
+      <td class="p-3">${r.status}</td>
+    </tr>
+  `).join("");
+}
+loadRiwayat();
+</script>
+
+<section class="p-4 bg-white shadow rounded-xl mb-6">
+  <h2 class="text-xl font-semibold mb-3">Invoice Servis</h2>
+
+  <div>
+    <label class="block">Nama Pelanggan</label>
+    <input id="namaInv" class="w-full p-3 border rounded mb-3" placeholder="Masukkan nama">
+
+    <label class="block">Jenis Servis</label>
+    <select id="jenisServis" class="w-full p-3 border rounded mb-3">
+      <option value="50000">Ganti Oli - Rp 50.000</option>
+      <option value="90000">Servis Ringan - Rp 90.000</option>
+      <option value="150000">Servis Sedang - Rp 150.000</option>
+      <option value="250000">Servis Besar - Rp 250.000</option>
+    </select>
+
+    <label class="block">Tambahan Biaya (opsional)</label>
+    <input id="tambahan" type="number" class="w-full p-3 border rounded mb-3" placeholder="0">
+
+    <button onclick="hitungInvoice()" class="w-full bg-blue-600 text-white py-3 rounded-lg">
+      Hitung Total
+    </button>
+
+    <div id="hasilInvoice" class="mt-4 p-4 bg-gray-100 rounded-xl"></div>
+  </div>
+</section>
+
+<script>
+function hitungInvoice(){
+  const nama = document.getElementById("namaInv").value;
+  const servis = parseInt(document.getElementById("jenisServis").value);
+  const tambahan = parseInt(document.getElementById("tambahan").value) || 0;
+
+  const total = servis + tambahan;
+
+  document.getElementById("hasilInvoice").innerHTML = `
+    <p><b>Nama:</b> ${nama}</p>
+    <p><b>Biaya Servis:</b> Rp ${servis.toLocaleString()}</p>
+    <p><b>Tambahan:</b> Rp ${tambahan.toLocaleString()}</p>
+    <p class="text-lg font-bold mt-2">Total: Rp ${total.toLocaleString()}</p>
+  `;
+}
+</script>
+
+<section class="p-4 bg-white shadow rounded-xl mb-6">
+  <h2 class="text-xl font-semibold mb-3">Pembayaran</h2>
+
+  <label class="block mb-2">Pilih Metode Pembayaran</label>
+  <select id="metode" class="w-full p-3 border rounded mb-3">
+    <option>Cash</option>
+    <option>OVO</option>
+    <option>DANA</option>
+    <option>GoPay</option>
+    <option>Transfer Bank</option>
+  </select>
+
+  <button onclick="prosesBayar()" class="w-full bg-green-600 text-white py-3 rounded-lg">
+    Proses Pembayaran
+  </button>
+
+  <div id="hasilBayar" class="p-4 mt-4 bg-gray-100 rounded-xl"></div>
+</section>
+
+<script>
+function prosesBayar(){
+  const metode = document.getElementById("metode").value;
+
+  document.getElementById("hasilBayar").innerHTML = `
+    <p><b>Metode:</b> ${metode}</p>
+    <p>Pembayaran berhasil diproses.</p>
+  `;
+}
+</script>
+
+<section class="p-4 bg-white shadow rounded-xl mb-6">
+  <h2 class="text-xl font-semibold mb-3">Booking Servis — Admin</h2>
+
+  <label class="block">Nama Pelanggan</label>
+  <input id="namaBook" class="w-full p-3 border rounded mb-3" placeholder="Nama pelanggan">
+
+  <label class="block">Tanggal Servis</label>
+  <input id="tglBook" type="date" class="w-full p-3 border rounded mb-3">
+
+  <label class="block">Jenis Servis</label>
+  <select id="servisBook" class="w-full p-3 border rounded mb-3">
+    <option>Ganti Oli</option>
+    <option>Servis Ringan</option>
+    <option>Servis Sedang</option>
+    <option>Servis Besar</option>
+  </select>
+
+  <button onclick="tambahBooking()" class="w-full bg-purple-600 text-white py-3 rounded-lg">
+    Tambah Booking
+  </button>
+
+  <div class="mt-4">
+    <h3 class="font-semibold text-lg mb-2">Daftar Booking</h3>
+    <ul id="listBooking" class="space-y-2"></ul>
+  </div>
+</section>
+
+<script>
+let booking = [];
+
+function tambahBooking(){
+  const nama = document.getElementById("namaBook").value;
+  const tgl = document.getElementById("tglBook").value;
+  const servis = document.getElementById("servisBook").value;
+
+  booking.push({ nama, tgl, servis });
+
+  renderBooking();
+}
+
+function renderBooking(){
+  const list = document.getElementById("listBooking");
+  list.innerHTML = booking.map(b=>`
+    <li class="p-3 bg-gray-100 rounded-xl">
+      <p><b>${b.nama}</b></p>
+      <p>${b.tgl}</p>
+      <p>${b.servis}</p>
+    </li>
+  `).join("");
+}
+</script>
+
+
+<!-- Section Booking -->
+<section class="max-w-7xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Booking Servis</h1>
+  <p class="mb-4 text-gray-700">Daftar booking terbaru pelanggan:</p>
+  <div class="overflow-x-auto">
+    <table class="w-full text-left border border-gray-200 rounded">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 border-b">No</th>
+          <th class="px-4 py-2 border-b">Nama Pelanggan</th>
+          <th class="px-4 py-2 border-b">Motor</th>
+          <th class="px-4 py-2 border-b">Jenis Layanan</th>
+          <th class="px-4 py-2 border-b">Tanggal</th>
+          <th class="px-4 py-2 border-b">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-2 border-b">1</td>
+          <td class="px-4 py-2 border-b">Rudi Santoso</td>
+          <td class="px-4 py-2 border-b">Honda Beat</td>
+          <td class="px-4 py-2 border-b">Servis Berkala</td>
+          <td class="px-4 py-2 border-b">2025-11-10</td>
+          <td class="px-4 py-2 border-b text-green-600 font-semibold">Selesai</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-2 border-b">2</td>
+          <td class="px-4 py-2 border-b">Siti Aminah</td>
+          <td class="px-4 py-2 border-b">Yamaha NMAX</td>
+          <td class="px-4 py-2 border-b">Ganti Ban</td>
+          <td class="px-4 py-2 border-b">2025-11-11</td>
+          <td class="px-4 py-2 border-b text-yellow-600 font-semibold">Proses</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-2 border-b">3</td>
+          <td class="px-4 py-2 border-b">Budi Hartono</td>
+          <td class="px-4 py-2 border-b">Suzuki GSX</td>
+          <td class="px-4 py-2 border-b">Servis Body</td>
+          <td class="px-4 py-2 border-b">2025-11-12</td>
+          <td class="px-4 py-2 border-b text-red-600 font-semibold">Pending</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script>
+const btn = document.getElementById('menu-btn');
+const menu = document.getElementById('mobile-menu');
+btn.addEventListener('click', ()=>menu.classList.toggle('hidden'));
+
+function toggleDropdown(id){ document.getElementById(id).classList.toggle('hidden'); }
+</script>
+</body>
+</html>

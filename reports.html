@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sparepart — Dealer Motor</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- Navbar -->
+<nav class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between h-16 items-center">
+      <a href="index.html" class="text-2xl font-bold">Dealer Motor</a>
+      <div class="hidden md:flex space-x-4 items-center">
+        <a href="index.html" class="hover:text-blue-500">Dashboard</a>
+        <div class="relative">
+          <button onclick="toggleDropdown('servicesDropdown')" class="hover:text-blue-500 flex items-center">
+            Layanan
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="servicesDropdown" class="absolute left-0 mt-1 hidden bg-white border shadow-md rounded z-10">
+            <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Daftar Layanan</a>
+            <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Tambah Layanan</a>
+            <a href="promo.html" class="block px-4 py-2 hover:bg-gray-100">Promo & Paket</a>
+          </div>
+        </div>
+        <a href="booking.html" class="hover:text-blue-500">Booking</a>
+        <a href="spareparts.html" class="hover:text-blue-500">Sparepart</a>
+        <a href="customers.html" class="hover:text-blue-500">Pelanggan</a>
+        <a href="locations.html" class="hover:text-blue-500">Lokasi</a>
+        <a href="reports.html" class="hover:text-blue-500">Laporan</a>
+        <a href="settings.html" class="hover:text-blue-500">Pengaturan</a>
+      </div>
+      <div class="md:hidden">
+        <button id="menu-btn" class="focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+    <a href="index.html" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+    <button onclick="toggleDropdown('mobileServices')" class="w-full text-left px-4 py-2 hover:bg-gray-100 flex justify-between items-center">
+      Layanan
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+      </svg>
+    </button>
+    <div id="mobileServices" class="hidden flex-col">
+      <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Daftar Layanan</a>
+      <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Tambah Layanan</a>
+      <a href="promo.html" class="block px-8 py-2 hover:bg-gray-100">Promo & Paket</a>
+    </div>
+    <a href="booking.html" class="block px-4 py-2 hover:bg-gray-100">Booking</a>
+    <a href="spareparts.html" class="block px-4 py-2 hover:bg-gray-100">Sparepart</a>
+    <a href="customers.html" class="block px-4 py-2 hover:bg-gray-100">Pelanggan</a>
+    <a href="locations.html" class="block px-4 py-2 hover:bg-gray-100">Lokasi</a>
+    <a href="reports.html" class="block px-4 py-2 hover:bg-gray-100">Laporan</a>
+    <a href="settings.html" class="block px-4 py-2 hover:bg-gray-100">Pengaturan</a>
+  </div>
+</nav>
+
+<section class="bg-gradient-to-b from-gray-50 to-white py-16 px-6 rounded-3xl shadow-inner">
+  <div class="text-center mb-10">
+    <h2 class="text-3xl font-bold text-gray-800">📊 Laporan Bengkel - Ringkasan</h2>
+    <p class="text-gray-500 mt-2 text-lg">Pantau performa bengkel Anda setiap saat dengan data real-time</p>
+  </div>
+
+  <div class="grid md:grid-cols-4 sm:grid-cols-2 gap-8">
+    <!-- Card 1 -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:-translate-y-2 transition">
+      <p class="text-gray-500">Total Servis Bulan Ini</p>
+      <h3 class="text-3xl font-bold text-indigo-600 mt-2">128</h3>
+      <p class="text-green-500 text-sm mt-1">⬆ +12% dari bulan lalu</p>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:-translate-y-2 transition">
+      <p class="text-gray-500">Total Sparepart Terjual</p>
+      <h3 class="text-3xl font-bold text-indigo-600 mt-2">342</h3>
+      <p class="text-green-500 text-sm mt-1">⬆ +8% dari bulan lalu</p>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:-translate-y-2 transition">
+      <p class="text-gray-500">Pendapatan (Rp)</p>
+      <h3 class="text-3xl font-bold text-indigo-600 mt-2">47.250.000</h3>
+      <p class="text-green-500 text-sm mt-1">⬆ +15% dari bulan lalu</p>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 hover:-translate-y-2 transition">
+      <p class="text-gray-500">Pelanggan Baru</p>
+      <h3 class="text-3xl font-bold text-indigo-600 mt-2">26</h3>
+      <p class="text-green-500 text-sm mt-1">⬆ +5 pelanggan baru</p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white py-16 px-6 rounded-3xl shadow-xl border border-gray-100 mt-10">
+  <div class="text-center mb-10">
+    <h2 class="text-2xl font-bold text-gray-800">📈 Grafik Servis & Penjualan</h2>
+    <p class="text-gray-500 mt-2 text-lg">Pantau tren performa bengkel setiap bulan</p>
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-10">
+    <!-- Chart 1 -->
+    <div class="bg-gradient-to-br from-indigo-50 to-white p-6 rounded-2xl shadow-lg">
+      <h3 class="text-gray-700 font-semibold mb-4">Tren Servis Bulanan</h3>
+      <canvas id="chartServis"></canvas>
+    </div>
+
+    <!-- Chart 2 -->
+    <div class="bg-gradient-to-br from-indigo-50 to-white p-6 rounded-2xl shadow-lg">
+      <h3 class="text-gray-700 font-semibold mb-4">Penjualan Sparepart</h3>
+      <canvas id="chartSparepart"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- Script Chart -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctx1 = document.getElementById('chartServis');
+new Chart(ctx1, {
+  type: 'line',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+    datasets: [{
+      label: 'Jumlah Servis',
+      data: [45, 56, 72, 80, 95, 128],
+      borderColor: '#4F46E5',
+      backgroundColor: 'rgba(79,70,229,0.2)',
+      fill: true,
+      tension: 0.4
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { display: false } } }
+});
+
+const ctx2 = document.getElementById('chartSparepart');
+new Chart(ctx2, {
+  type: 'bar',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+    datasets: [{
+      label: 'Sparepart Terjual',
+      data: [120, 140, 180, 200, 260, 342],
+      backgroundColor: '#4F46E5'
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { display: false } } }
+});
+</script>
+
+<section class="bg-gray-50 py-16 px-6 rounded-3xl shadow-inner border border-gray-200 mt-10">
+  <div class="text-center mb-8">
+    <h2 class="text-2xl font-bold text-gray-800">🧾 Laporan Transaksi Servis</h2>
+    <p class="text-gray-500 mt-1 text-lg">Daftar transaksi servis pelanggan</p>
+  </div>
+
+  <div class="overflow-x-auto bg-white rounded-2xl shadow-lg border border-gray-100">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-indigo-600 text-white">
+        <tr>
+          <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">Tanggal</th>
+          <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">Nama</th>
+          <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">Motor</th>
+          <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">Jenis Servis</th>
+          <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">Total (Rp)</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100 text-gray-700">
+        <tr class="hover:bg-gray-50 transition">
+          <td class="px-6 py-4">2025-11-02</td>
+          <td class="px-6 py-4">Budi Santoso</td>
+          <td class="px-6 py-4">Honda Beat</td>
+          <td class="px-6 py-4">Ganti Oli + Tune Up</td>
+          <td class="px-6 py-4 font-semibold">150.000</td>
+        </tr>
+        <tr class="hover:bg-gray-50 transition">
+          <td class="px-6 py-4">2025-11-03</td>
+          <td class="px-6 py-4">Siti Marlina</td>
+          <td class="px-6 py-4">Yamaha NMAX</td>
+          <td class="px-6 py-4">Servis CVT</td>
+          <td class="px-6 py-4 font-semibold">280.000</td>
+        </tr>
+        <tr class="hover:bg-gray-50 transition">
+          <td class="px-6 py-4">2025-11-04</td>
+          <td class="px-6 py-4">Agus Setiawan</td>
+          <td class="px-6 py-4">Suzuki Satria</td>
+          <td class="px-6 py-4">Ganti Kampas Rem</td>
+          <td class="px-6 py-4 font-semibold">130.000</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="relative py-20 px-8 bg-gradient-to-br from-slate-50 via-white to-blue-100">
+  <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+
+  <div class="relative max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-extrabold text-gray-800">💰 Laporan Keuangan Bengkel</h2>
+      <p class="text-gray-500 text-lg mt-2">Pantau pendapatan, pengeluaran, dan profit setiap bulan</p>
+    </div>
+
+    <!-- Ringkasan Finansial -->
+    <div class="grid md:grid-cols-3 sm:grid-cols-1 gap-8 mb-12">
+      <!-- Pendapatan -->
+      <div class="backdrop-blur-lg bg-white/70 p-6 rounded-3xl shadow-lg border border-gray-100 hover:-translate-y-2 transition">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="text-gray-700 font-semibold">Pendapatan</h3>
+          <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">+15%</span>
+        </div>
+        <p class="text-3xl font-bold text-green-600">Rp 47.250.000</p>
+        <p class="text-sm text-gray-500 mt-1">Bulan ini</p>
+      </div>
+
+      <!-- Pengeluaran -->
+      <div class="backdrop-blur-lg bg-white/70 p-6 rounded-3xl shadow-lg border border-gray-100 hover:-translate-y-2 transition">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="text-gray-700 font-semibold">Pengeluaran</h3>
+          <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm">-5%</span>
+        </div>
+        <p class="text-3xl font-bold text-red-600">Rp 12.800.000</p>
+        <p class="text-sm text-gray-500 mt-1">Bulan ini</p>
+      </div>
+
+      <!-- Profit -->
+      <div class="backdrop-blur-lg bg-white/70 p-6 rounded-3xl shadow-lg border border-gray-100 hover:-translate-y-2 transition">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="text-gray-700 font-semibold">Profit Bersih</h3>
+          <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">Stabil</span>
+        </div>
+        <p class="text-3xl font-bold text-blue-600">Rp 34.450.000</p>
+        <p class="text-sm text-gray-500 mt-1">Setelah pengeluaran</p>
+      </div>
+    </div>
+
+    <!-- Grafik Tren Keuangan -->
+    <div class="grid md:grid-cols-2 gap-8">
+      <!-- Grafik Pendapatan vs Pengeluaran -->
+      <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 hover:shadow-2xl transition">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">Tren Pendapatan & Pengeluaran</h3>
+        <canvas id="chartFinance"></canvas>
+      </div>
+
+      <!-- Grafik Profit -->
+      <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 hover:shadow-2xl transition">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">Profit Bersih per Bulan</h3>
+        <canvas id="chartProfit"></canvas>
+      </div>
+    </div>
+
+    <!-- Tabel Detail Keuangan -->
+    <div class="mt-14 bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+      <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+        <h3 class="text-2xl font-semibold text-gray-800">📘 Rincian Transaksi Keuangan</h3>
+        <button class="px-4 py-2 bg-indigo-600 text-white rounded-full text-sm hover:bg-indigo-700 transition">Download Laporan</button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 text-sm text-gray-700">
+          <thead class="bg-indigo-600 text-white">
+            <tr>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Tanggal</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Deskripsi</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Kategori</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Jumlah (Rp)</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Tipe</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">2025-11-01</td>
+              <td class="px-6 py-4">Servis Umum</td>
+              <td class="px-6 py-4">Pendapatan</td>
+              <td class="px-6 py-4 text-green-600 font-semibold">+250.000</td>
+              <td class="px-6 py-4">Cash</td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">2025-11-02</td>
+              <td class="px-6 py-4">Pembelian Oli & Sparepart</td>
+              <td class="px-6 py-4">Pengeluaran</td>
+              <td class="px-6 py-4 text-red-600 font-semibold">-1.200.000</td>
+              <td class="px-6 py-4">Transfer</td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">2025-11-05</td>
+              <td class="px-6 py-4">Servis CVT</td>
+              <td class="px-6 py-4">Pendapatan</td>
+              <td class="px-6 py-4 text-green-600 font-semibold">+300.000</td>
+              <td class="px-6 py-4">QRIS</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Chart.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctxF = document.getElementById('chartFinance');
+new Chart(ctxF, {
+  type: 'line',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov'],
+    datasets: [
+      {
+        label: 'Pendapatan',
+        data: [42000000, 46000000, 47000000, 49000000, 52000000, 47250000],
+        borderColor: '#22c55e',
+        backgroundColor: 'rgba(34,197,94,0.2)',
+        fill: true,
+        tension: 0.4
+      },
+      {
+        label: 'Pengeluaran',
+        data: [15000000, 13000000, 14000000, 12000000, 11000000, 12800000],
+        borderColor: '#ef4444',
+        backgroundColor: 'rgba(239,68,68,0.2)',
+        fill: true,
+        tension: 0.4
+      }
+    ]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+
+const ctxP = document.getElementById('chartProfit');
+new Chart(ctxP, {
+  type: 'bar',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+    datasets: [{
+      label: 'Profit Bersih',
+      data: [27000000, 33000000, 35000000, 37000000, 41000000, 34450000],
+      backgroundColor: '#3b82f6'
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { display: false } } }
+});
+</script>
+
+<section class="relative py-20 px-8 bg-gradient-to-br from-gray-50 via-white to-blue-50 overflow-hidden">
+  <!-- Efek background -->
+  <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/hexellence.png')] opacity-10"></div>
+
+  <div class="relative max-w-7xl mx-auto">
+    <div class="text-center mb-14">
+      <h2 class="text-4xl font-extrabold text-gray-800 tracking-tight">🧩 Laporan Sparepart & Stok Barang</h2>
+      <p class="text-gray-500 text-lg mt-3">Pantau ketersediaan stok, penjualan, dan supplier sparepart secara realtime</p>
+    </div>
+
+    <!-- Ringkasan Inventory -->
+    <div class="grid md:grid-cols-4 sm:grid-cols-2 gap-8 mb-12">
+      <!-- Card 1 -->
+      <div class="bg-white/70 backdrop-blur-lg border border-gray-100 p-6 rounded-3xl shadow-xl hover:-translate-y-2 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 text-sm">Total Item</p>
+            <h3 class="text-3xl font-bold text-indigo-600 mt-1">356</h3>
+          </div>
+          <div class="p-3 bg-indigo-100 rounded-xl text-indigo-600">
+            📦
+          </div>
+        </div>
+        <p class="text-green-500 text-sm mt-3">⬆ +12 item baru</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white/70 backdrop-blur-lg border border-gray-100 p-6 rounded-3xl shadow-xl hover:-translate-y-2 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 text-sm">Stok Menipis</p>
+            <h3 class="text-3xl font-bold text-red-500 mt-1">18</h3>
+          </div>
+          <div class="p-3 bg-red-100 rounded-xl text-red-600">
+            ⚠️
+          </div>
+        </div>
+        <p class="text-red-500 text-sm mt-3">Segera restock</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white/70 backdrop-blur-lg border border-gray-100 p-6 rounded-3xl shadow-xl hover:-translate-y-2 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 text-sm">Total Penjualan</p>
+            <h3 class="text-3xl font-bold text-green-600 mt-1">Rp 12.480.000</h3>
+          </div>
+          <div class="p-3 bg-green-100 rounded-xl text-green-600">
+            💰
+          </div>
+        </div>
+        <p class="text-green-500 text-sm mt-3">⬆ +22% dari bulan lalu</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-white/70 backdrop-blur-lg border border-gray-100 p-6 rounded-3xl shadow-xl hover:-translate-y-2 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 text-sm">Supplier Aktif</p>
+            <h3 class="text-3xl font-bold text-blue-600 mt-1">8</h3>
+          </div>
+          <div class="p-3 bg-blue-100 rounded-xl text-blue-600">
+            🏢
+          </div>
+        </div>
+        <p class="text-blue-500 text-sm mt-3">Kerjasama stabil</p>
+      </div>
+    </div>
+
+    <!-- Grafik -->
+    <div class="grid md:grid-cols-2 gap-10 mb-16">
+      <!-- Grafik Stok -->
+      <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 hover:shadow-2xl transition">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">📊 Grafik Stok Masuk vs Keluar</h3>
+        <canvas id="chartStok"></canvas>
+      </div>
+
+      <!-- Grafik Penjualan Sparepart -->
+      <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 hover:shadow-2xl transition">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">💹 Tren Penjualan Sparepart</h3>
+        <canvas id="chartSales"></canvas>
+      </div>
+    </div>
+
+    <!-- Tabel Sparepart -->
+    <div class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+      <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+        <h3 class="text-2xl font-semibold text-gray-800">📦 Daftar Sparepart</h3>
+        <button class="px-4 py-2 bg-indigo-600 text-white rounded-full text-sm hover:bg-indigo-700 transition">
+          + Tambah Item
+        </button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 text-sm text-gray-700">
+          <thead class="bg-indigo-600 text-white">
+            <tr>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Nama Barang</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Stok</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Harga (Rp)</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Supplier</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">Oli Yamalube 800ml</td>
+              <td class="px-6 py-4 font-semibold">35</td>
+              <td class="px-6 py-4">55.000</td>
+              <td class="px-6 py-4">PT Yamaha Parts</td>
+              <td class="px-6 py-4 text-green-600 font-semibold">Tersedia</td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">Kampas Rem Belakang</td>
+              <td class="px-6 py-4 font-semibold">8</td>
+              <td class="px-6 py-4">75.000</td>
+              <td class="px-6 py-4">PT Federal Motor</td>
+              <td class="px-6 py-4 text-yellow-500 font-semibold">Menipis</td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">Busi NGK CR7</td>
+              <td class="px-6 py-4 font-semibold">2</td>
+              <td class="px-6 py-4">35.000</td>
+              <td class="px-6 py-4">PT NGK Indonesia</td>
+              <td class="px-6 py-4 text-red-600 font-semibold">Habis</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Chart.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctxStock = document.getElementById('chartStok');
+new Chart(ctxStock, {
+  type: 'bar',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+    datasets: [
+      {
+        label: 'Stok Masuk',
+        data: [120, 140, 150, 180, 210, 200],
+        backgroundColor: '#4F46E5'
+      },
+      {
+        label: 'Stok Keluar',
+        data: [100, 130, 160, 170, 190, 195],
+        backgroundColor: '#60A5FA'
+      }
+    ]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+
+const ctxSales = document.getElementById('chartSales');
+new Chart(ctxSales, {
+  type: 'line',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+    datasets: [{
+      label: 'Total Penjualan (Rp)',
+      data: [8000000, 9000000, 9500000, 10500000, 11400000, 12480000],
+      borderColor: '#16a34a',
+      backgroundColor: 'rgba(22,163,74,0.2)',
+      fill: true,
+      tension: 0.4
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+</script>
+
+<section class="relative py-20 px-8 bg-gradient-to-br from-white via-gray-50 to-blue-100 overflow-hidden">
+  <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+
+  <div class="relative max-w-7xl mx-auto">
+    <div class="text-center mb-14">
+      <h2 class="text-4xl font-extrabold text-gray-800 tracking-tight">👥 Laporan Pelanggan & Analitik</h2>
+      <p class="text-gray-600 text-lg mt-3">Pantau performa pelanggan, loyalitas, dan tingkat kepuasan mereka</p>
+    </div>
+
+    <!-- Ringkasan pelanggan -->
+    <div class="grid md:grid-cols-4 sm:grid-cols-2 gap-8 mb-12">
+      <!-- Card 1 -->
+      <div class="bg-white/70 backdrop-blur-lg border border-gray-200 p-6 rounded-3xl shadow-lg hover:-translate-y-2 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 text-sm">Total Pelanggan</p>
+            <h3 class="text-3xl font-bold text-blue-700 mt-1">1.284</h3>
+          </div>
+          <div class="p-3 bg-blue-100 rounded-xl text-blue-600 text-xl">👤</div>
+        </div>
+        <p class="text-green-600 text-sm mt-3">⬆ +14% bulan ini</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white/70 backdrop-blur-lg border border-gray-200 p-6 rounded-3xl shadow-lg hover:-translate-y-2 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 text-sm">Member Aktif</p>
+            <h3 class="text-3xl font-bold text-indigo-700 mt-1">756</h3>
+          </div>
+          <div class="p-3 bg-indigo-100 rounded-xl text-indigo-600 text-xl">🏅</div>
+        </div>
+        <p class="text-indigo-600 text-sm mt-3">Loyal customer meningkat</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white/70 backdrop-blur-lg border border-gray-200 p-6 rounded-3xl shadow-lg hover:-translate-y-2 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 text-sm">Servis Rata-rata / Bulan</p>
+            <h3 class="text-3xl font-bold text-green-700 mt-1">2.3x</h3>
+          </div>
+          <div class="p-3 bg-green-100 rounded-xl text-green-600 text-xl">🛠️</div>
+        </div>
+        <p class="text-green-600 text-sm mt-3">Kepuasan pelanggan meningkat</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-white/70 backdrop-blur-lg border border-gray-200 p-6 rounded-3xl shadow-lg hover:-translate-y-2 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 text-sm">Rating Kepuasan</p>
+            <h3 class="text-3xl font-bold text-yellow-600 mt-1">4.7⭐</h3>
+          </div>
+          <div class="p-3 bg-yellow-100 rounded-xl text-yellow-600 text-xl">💬</div>
+        </div>
+        <p class="text-yellow-600 text-sm mt-3">⬆ +0.3 dari bulan lalu</p>
+      </div>
+    </div>
+
+    <!-- Chart Area -->
+    <div class="grid md:grid-cols-2 gap-10 mb-16">
+      <!-- Grafik Pertumbuhan Pelanggan -->
+      <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 hover:shadow-2xl transition">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">📈 Pertumbuhan Pelanggan</h3>
+        <canvas id="customerGrowth"></canvas>
+      </div>
+
+      <!-- Grafik Distribusi Membership -->
+      <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 hover:shadow-2xl transition">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">🏆 Distribusi Level Member</h3>
+        <canvas id="memberLevel"></canvas>
+      </div>
+    </div>
+
+    <!-- Tabel Analitik Pelanggan -->
+    <div class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+      <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+        <h3 class="text-2xl font-semibold text-gray-800">📋 Data Pelanggan Aktif</h3>
+        <button class="px-4 py-2 bg-blue-600 text-white rounded-full text-sm hover:bg-blue-700 transition">
+          + Tambah Pelanggan
+        </button>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 text-sm text-gray-700">
+          <thead class="bg-blue-600 text-white">
+            <tr>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Nama</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Telepon</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Member</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Servis Terakhir</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Total Pengeluaran</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4 font-semibold">Budi Santoso</td>
+              <td class="px-6 py-4">0812-4456-7789</td>
+              <td class="px-6 py-4 text-yellow-600 font-semibold">Gold</td>
+              <td class="px-6 py-4">3 hari lalu</td>
+              <td class="px-6 py-4 text-green-600 font-semibold">Rp 2.450.000</td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4 font-semibold">Rina Kartika</td>
+              <td class="px-6 py-4">0853-8899-1122</td>
+              <td class="px-6 py-4 text-gray-700 font-semibold">Silver</td>
+              <td class="px-6 py-4">1 minggu lalu</td>
+              <td class="px-6 py-4 text-green-600 font-semibold">Rp 1.200.000</td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4 font-semibold">Andi Pratama</td>
+              <td class="px-6 py-4">0821-3345-6789</td>
+              <td class="px-6 py-4 text-amber-700 font-semibold">Bronze</td>
+              <td class="px-6 py-4">2 minggu lalu</td>
+              <td class="px-6 py-4 text-green-600 font-semibold">Rp 850.000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Chart.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctxGrowth = document.getElementById('customerGrowth');
+new Chart(ctxGrowth, {
+  type: 'line',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun'],
+    datasets: [{
+      label: 'Jumlah Pelanggan',
+      data: [840, 910, 1040, 1175, 1284, 1388],
+      borderColor: '#2563eb',
+      backgroundColor: 'rgba(37,99,235,0.2)',
+      fill: true,
+      tension: 0.4
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+
+const ctxLevel = document.getElementById('memberLevel');
+new Chart(ctxLevel, {
+  type: 'doughnut',
+  data: {
+    labels: ['Bronze', 'Silver', 'Gold'],
+    datasets: [{
+      label: 'Member Distribution',
+      data: [320, 460, 504],
+      backgroundColor: ['#d97706', '#9ca3af', '#facc15']
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+</script>
+
+<!-- Tambahkan di <head> -->
+<link href="https://cdn.jsdelivr.net/npm/lucide-icons@latest/font/lucide.css" rel="stylesheet">
+
+<section class="relative py-20 px-8 bg-gradient-to-br from-gray-50 via-white to-emerald-50 overflow-hidden">
+  <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/symphony.png')] opacity-10"></div>
+
+  <div class="relative max-w-7xl mx-auto">
+   
+
+    <!-- Statistik Ringkas -->
+    <div class="grid md:grid-cols-4 sm:grid-cols-2 gap-8 mb-12">
+      <!-- Pendapatan -->
+      <div class="bg-white/80 backdrop-blur-lg border border-gray-200 p-6 rounded-3xl shadow-lg hover:-translate-y-2 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 text-sm">Total Pendapatan</p>
+            <h3 class="text-3xl font-bold text-emerald-700 mt-1">Rp 48.250.000</h3>
+          </div>
+          <div class="p-3 bg-emerald-100 rounded-xl text-emerald-600">
+            <i class="lucide lucide-wallet"></i>
+          </div>
+        </div>
+        <p class="text-emerald-600 text-sm mt-3">⬆ +15% dari bulan lalu</p>
+      </div>
+
+      <!-- Pengeluaran -->
+      <div class="bg-white/80 backdrop-blur-lg border border-gray-200 p-6 rounded-3xl shadow-lg hover:-translate-y-2 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 text-sm">Total Pengeluaran</p>
+            <h3 class="text-3xl font-bold text-red-600 mt-1">Rp 21.800.000</h3>
+          </div>
+          <div class="p-3 bg-red-100 rounded-xl text-red-600">
+            <i class="lucide lucide-credit-card"></i>
+          </div>
+        </div>
+        <p class="text-red-600 text-sm mt-3">⬇ -5% dari bulan lalu</p>
+      </div>
+
+      <!-- Laba Bersih -->
+      <div class="bg-white/80 backdrop-blur-lg border border-gray-200 p-6 rounded-3xl shadow-lg hover:-translate-y-2 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 text-sm">Laba Bersih</p>
+            <h3 class="text-3xl font-bold text-blue-700 mt-1">Rp 26.450.000</h3>
+          </div>
+          <div class="p-3 bg-blue-100 rounded-xl text-blue-600">
+            <i class="lucide lucide-piggy-bank"></i>
+          </div>
+        </div>
+        <p class="text-blue-600 text-sm mt-3">Profit Margin 54%</p>
+      </div>
+
+      <!-- Transaksi -->
+      <div class="bg-white/80 backdrop-blur-lg border border-gray-200 p-6 rounded-3xl shadow-lg hover:-translate-y-2 transition">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-500 text-sm">Transaksi Bulan Ini</p>
+            <h3 class="text-3xl font-bold text-indigo-700 mt-1">378</h3>
+          </div>
+          <div class="p-3 bg-indigo-100 rounded-xl text-indigo-600">
+            <i class="lucide lucide-bar-chart-3"></i>
+          </div>
+        </div>
+        <p class="text-indigo-600 text-sm mt-3">⬆ +9 transaksi baru</p>
+      </div>
+    </div>
+
+    <!-- Grafik Keuangan -->
+    <div class="grid md:grid-cols-2 gap-10 mb-16">
+      <!-- Grafik Pendapatan -->
+      <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 hover:shadow-2xl transition">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+          <i class="lucide lucide-line-chart text-emerald-600"></i> Grafik Pendapatan Bulanan
+        </h3>
+        <canvas id="chartIncome"></canvas>
+      </div>
+
+      <!-- Grafik Pengeluaran -->
+      <div class="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 hover:shadow-2xl transition">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+          <i class="lucide lucide-trending-down text-red-500"></i> Grafik Pengeluaran Bulanan
+        </h3>
+        <canvas id="chartExpense"></canvas>
+      </div>
+    </div>
+
+    <!-- Tabel Transaksi -->
+    <div class="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
+      <div class="p-6 border-b border-gray-200 flex justify-between items-center">
+        <h3 class="text-2xl font-semibold text-gray-800 flex items-center gap-2">
+          <i class="lucide lucide-list-check text-indigo-600"></i> Riwayat Transaksi
+        </h3>
+        <button class="px-4 py-2 bg-emerald-600 text-white rounded-full text-sm hover:bg-emerald-700 transition flex items-center gap-2">
+          <i class="lucide lucide-plus-circle text-white"></i> Tambah Transaksi
+        </button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 text-sm text-gray-700">
+          <thead class="bg-emerald-600 text-white">
+            <tr>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Tanggal</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Deskripsi</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Tipe</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Nominal</th>
+              <th class="px-6 py-3 text-left font-semibold uppercase tracking-wider">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">10 Nov 2025</td>
+              <td class="px-6 py-4 font-semibold">Servis Motor R25</td>
+              <td class="px-6 py-4 text-emerald-600 font-semibold flex items-center gap-1"><i class="lucide lucide-arrow-up-circle"></i> Pendapatan</td>
+              <td class="px-6 py-4">Rp 750.000</td>
+              <td class="px-6 py-4 text-green-600 font-semibold">Selesai</td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">09 Nov 2025</td>
+              <td class="px-6 py-4 font-semibold">Pembelian Sparepart</td>
+              <td class="px-6 py-4 text-red-600 font-semibold flex items-center gap-1"><i class="lucide lucide-arrow-down-circle"></i> Pengeluaran</td>
+              <td class="px-6 py-4">Rp 1.250.000</td>
+              <td class="px-6 py-4 text-yellow-500 font-semibold">Proses</td>
+            </tr>
+            <tr class="hover:bg-gray-50 transition">
+              <td class="px-6 py-4">08 Nov 2025</td>
+              <td class="px-6 py-4 font-semibold">Servis Mio M3</td>
+              <td class="px-6 py-4 text-emerald-600 font-semibold flex items-center gap-1"><i class="lucide lucide-arrow-up-circle"></i> Pendapatan</td>
+              <td class="px-6 py-4">Rp 400.000</td>
+              <td class="px-6 py-4 text-green-600 font-semibold">Selesai</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctxIncome = document.getElementById('chartIncome');
+new Chart(ctxIncome, {
+  type: 'line',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov'],
+    datasets: [{
+      label: 'Pendapatan (Rp)',
+      data: [42000000, 43000000, 45500000, 47000000, 48250000, 50000000, 52000000, 51000000, 53000000, 54200000, 54800000],
+      borderColor: '#10b981',
+      backgroundColor: 'rgba(16,185,129,0.2)',
+      fill: true,
+      tension: 0.4
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+
+const ctxExpense = document.getElementById('chartExpense');
+new Chart(ctxExpense, {
+  type: 'bar',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov'],
+    datasets: [{
+      label: 'Pengeluaran (Rp)',
+      data: [18000000, 20000000, 21000000, 19000000, 21800000, 23000000, 24500000, 25000000, 24800000, 25200000, 21800000],
+      backgroundColor: '#ef4444'
+    }]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+});
+</script>
+
+<!-- Section Laporan Bengkel Premium -->
+<section class="bg-gray-950 text-white py-24 px-6 lg:px-20">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-12">
+      <div>
+        <h2 class="text-4xl font-extrabold tracking-tight">Laporan Keuangan Bengkel</h2>
+        <p class="text-gray-400 mt-2 text-lg">Pantau kinerja bengkel secara real-time dengan laporan profesional</p>
+      </div>
+      <button class="bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-xl font-semibold flex items-center gap-2 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        Tambah Laporan
+      </button>
+    </div>
+
+    <!-- Cards Statistik -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Card 1 -->
+      <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:border-indigo-500/50 transition-all shadow-lg hover:shadow-indigo-500/30">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-sm text-gray-400 uppercase">Total Pendapatan</h3>
+            <p class="text-3xl font-bold text-white mt-2">Rp 45.200.000</p>
+          </div>
+          <div class="bg-indigo-600 p-3 rounded-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v8m0 0l-3-3m3 3l3-3m6 3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+        </div>
+        <div class="w-full bg-gray-700 h-2 rounded-full">
+          <div class="bg-indigo-500 h-2 rounded-full w-3/4"></div>
+        </div>
+        <p class="text-sm text-gray-400 mt-2">+12% dibanding bulan lalu</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:border-green-500/50 transition-all shadow-lg hover:shadow-green-500/30">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-sm text-gray-400 uppercase">Total Pengeluaran</h3>
+            <p class="text-3xl font-bold text-white mt-2">Rp 18.400.000</p>
+          </div>
+          <div class="bg-green-600 p-3 rounded-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 16V8m0 0l3 3m-3-3l-3 3m6 6a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+        </div>
+        <div class="w-full bg-gray-700 h-2 rounded-full">
+          <div class="bg-green-500 h-2 rounded-full w-2/4"></div>
+        </div>
+        <p class="text-sm text-gray-400 mt-2">+5% dibanding bulan lalu</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:border-yellow-500/50 transition-all shadow-lg hover:shadow-yellow-500/30">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-sm text-gray-400 uppercase">Servis Selesai</h3>
+            <p class="text-3xl font-bold text-white mt-2">326</p>
+          </div>
+          <div class="bg-yellow-500 p-3 rounded-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+        </div>
+        <div class="w-full bg-gray-700 h-2 rounded-full">
+          <div class="bg-yellow-400 h-2 rounded-full w-5/6"></div>
+        </div>
+        <p class="text-sm text-gray-400 mt-2">Naik 8% dari minggu lalu</p>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/10 hover:border-red-500/50 transition-all shadow-lg hover:shadow-red-500/30">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="text-sm text-gray-400 uppercase">Servis Pending</h3>
+            <p class="text-3xl font-bold text-white mt-2">42</p>
+          </div>
+          <div class="bg-red-600 p-3 rounded-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12A9 9 0 113 12a9 9 0 0118 0z" />
+            </svg>
+          </div>
+        </div>
+        <div class="w-full bg-gray-700 h-2 rounded-full">
+          <div class="bg-red-500 h-2 rounded-full w-1/3"></div>
+        </div>
+        <p class="text-sm text-gray-400 mt-2">Turun 4% minggu ini</p>
+      </div>
+    </div>
+
+    <!-- Tabel Laporan -->
+    <div class="mt-16 bg-white/10 backdrop-blur-md rounded-3xl border border-white/10 shadow-xl overflow-hidden">
+      <div class="p-6 border-b border-white/10 flex justify-between items-center">
+        <h3 class="text-xl font-semibold">Detail Laporan Servis & Keuangan</h3>
+        <button class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16M4 12h8m-8 5h16" />
+          </svg>
+          Export Excel
+        </button>
+      </div>
+      <table class="w-full text-left text-gray-300">
+        <thead class="bg-white/10 uppercase text-sm">
+          <tr>
+            <th class="px-6 py-3">Tanggal</th>
+            <th class="px-6 py-3">Jenis Servis</th>
+            <th class="px-6 py-3">Biaya</th>
+            <th class="px-6 py-3">Mekanik</th>
+            <th class="px-6 py-3">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hover:bg-white/5 transition">
+            <td class="px-6 py-4">10 Nov 2025</td>
+            <td class="px-6 py-4">Ganti Oli & Tune Up</td>
+            <td class="px-6 py-4 text-green-400 font-semibold">Rp 180.000</td>
+            <td class="px-6 py-4">Dimas</td>
+            <td class="px-6 py-4"><span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-lg text-sm">Selesai</span></td>
+          </tr>
+          <tr class="hover:bg-white/5 transition">
+            <td class="px-6 py-4">09 Nov 2025</td>
+            <td class="px-6 py-4">Ganti Kampas Rem</td>
+            <td class="px-6 py-4 text-green-400 font-semibold">Rp 120.000</td>
+            <td class="px-6 py-4">Roni</td>
+            <td class="px-6 py-4"><span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-lg text-sm">Proses</span></td>
+          </tr>
+          <tr class="hover:bg-white/5 transition">
+            <td class="px-6 py-4">07 Nov 2025</td>
+            <td class="px-6 py-4">Servis Berat</td>
+            <td class="px-6 py-4 text-green-400 font-semibold">Rp 450.000</td>
+            <td class="px-6 py-4">Budi</td>
+            <td class="px-6 py-4"><span class="bg-red-500/20 text-red-400 px-3 py-1 rounded-lg text-sm">Pending</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<section class="relative py-20 px-8 bg-gradient-to-br from-indigo-50 via-white to-blue-100">
+  <!-- Background efek -->
+  <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/symphony.png')] opacity-10"></div>
+
+  <div class="relative max-w-7xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-extrabold text-gray-800">🔧 Laporan Performa Mekanik</h2>
+      <p class="text-gray-500 text-lg mt-2">Analisis produktivitas, kepuasan pelanggan, dan efisiensi kerja setiap mekanik</p>
+    </div>
+
+    <!-- Grid Mekanik -->
+    <div class="grid md:grid-cols-3 sm:grid-cols-2 gap-10">
+      <!-- Mekanik 1 -->
+      <div class="backdrop-blur-md bg-white/70 shadow-xl rounded-3xl p-6 border border-gray-100 hover:scale-105 transition">
+        <div class="flex items-center gap-4">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-16 h-16 rounded-full border-2 border-indigo-500" alt="Mekanik 1">
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">Andi Pratama</h3>
+            <p class="text-sm text-gray-500">Senior Mechanic</p>
+          </div>
+        </div>
+
+        <div class="mt-5 space-y-3">
+          <div>
+            <p class="text-gray-600 mb-1 text-sm">Jumlah Servis</p>
+            <div class="flex justify-between text-sm text-gray-700">
+              <span>185 Servis</span><span>90%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5 mt-1">
+              <div class="bg-indigo-600 h-2.5 rounded-full w-[90%]"></div>
+            </div>
+          </div>
+
+          <div>
+            <p class="text-gray-600 mb-1 text-sm">Kepuasan Pelanggan</p>
+            <div class="flex justify-between text-sm text-gray-700">
+              <span>4.8/5.0</span><span>⭐️⭐️⭐️⭐️⭐️</span>
+            </div>
+          </div>
+
+          <div>
+            <p class="text-gray-600 mb-1 text-sm">Waktu Servis Rata-rata</p>
+            <p class="text-gray-800 font-semibold">35 Menit</p>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <button class="px-4 py-2 bg-indigo-600 text-white rounded-full text-sm hover:bg-indigo-700 transition">
+            Lihat Detail
+          </button>
+        </div>
+      </div>
+
+      <!-- Mekanik 2 -->
+      <div class="backdrop-blur-md bg-white/70 shadow-xl rounded-3xl p-6 border border-gray-100 hover:scale-105 transition">
+        <div class="flex items-center gap-4">
+          <img src="https://randomuser.me/api/portraits/men/42.jpg" class="w-16 h-16 rounded-full border-2 border-indigo-500" alt="Mekanik 2">
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">Budi Setiawan</h3>
+            <p class="text-sm text-gray-500">Tune Up Specialist</p>
+          </div>
+        </div>
+
+        <div class="mt-5 space-y-3">
+          <div>
+            <p class="text-gray-600 mb-1 text-sm">Jumlah Servis</p>
+            <div class="flex justify-between text-sm text-gray-700">
+              <span>156 Servis</span><span>82%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5 mt-1">
+              <div class="bg-blue-500 h-2.5 rounded-full w-[82%]"></div>
+            </div>
+          </div>
+
+          <div>
+            <p class="text-gray-600 mb-1 text-sm">Kepuasan Pelanggan</p>
+            <div class="flex justify-between text-sm text-gray-700">
+              <span>4.6/5.0</span><span>⭐️⭐️⭐️⭐️⭐️</span>
+            </div>
+          </div>
+
+          <div>
+            <p class="text-gray-600 mb-1 text-sm">Waktu Servis Rata-rata</p>
+            <p class="text-gray-800 font-semibold">42 Menit</p>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <button class="px-4 py-2 bg-indigo-600 text-white rounded-full text-sm hover:bg-indigo-700 transition">
+            Lihat Detail
+          </button>
+        </div>
+      </div>
+
+      <!-- Mekanik 3 -->
+      <div class="backdrop-blur-md bg-white/70 shadow-xl rounded-3xl p-6 border border-gray-100 hover:scale-105 transition">
+        <div class="flex items-center gap-4">
+          <img src="https://randomuser.me/api/portraits/men/53.jpg" class="w-16 h-16 rounded-full border-2 border-indigo-500" alt="Mekanik 3">
+          <div>
+            <h3 class="text-xl font-bold text-gray-800">Slamet Hadi</h3>
+            <p class="text-sm text-gray-500">Electrical Expert</p>
+          </div>
+        </div>
+
+        <div class="mt-5 space-y-3">
+          <div>
+            <p class="text-gray-600 mb-1 text-sm">Jumlah Servis</p>
+            <div class="flex justify-between text-sm text-gray-700">
+              <span>133 Servis</span><span>76%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2.5 mt-1">
+              <div class="bg-indigo-400 h-2.5 rounded-full w-[76%]"></div>
+            </div>
+          </div>
+
+          <div>
+            <p class="text-gray-600 mb-1 text-sm">Kepuasan Pelanggan</p>
+            <div class="flex justify-between text-sm text-gray-700">
+              <span>4.5/5.0</span><span>⭐️⭐️⭐️⭐️⭐️</span>
+            </div>
+          </div>
+
+          <div>
+            <p class="text-gray-600 mb-1 text-sm">Waktu Servis Rata-rata</p>
+            <p class="text-gray-800 font-semibold">38 Menit</p>
+          </div>
+        </div>
+
+        <div class="mt-6 flex justify-end">
+          <button class="px-4 py-2 bg-indigo-600 text-white rounded-full text-sm hover:bg-indigo-700 transition">
+            Lihat Detail
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="max-w-7xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Laporan Bulanan</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="bg-blue-50 p-4 rounded shadow">
+      <h2 class="font-semibold text-lg">Total Booking</h2>
+      <p class="text-3xl font-bold mt-2">124</p>
+    </div>
+    <div class="bg-green-50 p-4 rounded shadow">
+      <h2 class="font-semibold text-lg">Layanan Selesai</h2>
+      <p class="text-3xl font-bold mt-2">98</p>
+    </div>
+    <div class="bg-yellow-50 p-4 rounded shadow">
+      <h2 class="font-semibold text-lg">Sparepart Terjual</h2>
+      <p class="text-3xl font-bold mt-2">76</p>
+    </div>
+  </div>
+</section>
+
+<script>
+const btn = document.getElementById('menu-btn');
+const menu = document.getElementById('mobile-menu');
+btn.addEventListener('click', ()=>menu.classList.toggle('hidden'));
+function toggleDropdown(id){ document.getElementById(id).classList.toggle('hidden'); }
+</script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Layanan — Dealer Motor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900">
+
+  <!-- Navbar (sama seperti index.html) -->
+  <nav class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex justify-between h-16 items-center">
+        <a href="index.html" class="text-2xl font-bold">Dealer Motor</a>
+        <div class="hidden md:flex space-x-4 items-center">
+          <a href="index.html" class="hover:text-blue-500">Dashboard</a>
+          <div class="relative">
+            <button onclick="toggleDropdown('servicesDropdown')" class="hover:text-blue-500 flex items-center">
+              Layanan
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div id="servicesDropdown" class="absolute left-0 mt-1 hidden bg-white border shadow-md rounded z-10">
+              <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Daftar Layanan</a>
+              <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Tambah Layanan</a>
+              <a href="promo.html" class="block px-4 py-2 hover:bg-gray-100">Promo & Paket</a>
+            </div>
+          </div>
+          <a href="booking.html" class="hover:text-blue-500">Booking</a>
+          <a href="spareparts.html" class="hover:text-blue-500">Sparepart</a>
+          <a href="customers.html" class="hover:text-blue-500">Pelanggan</a>
+          <a href="locations.html" class="hover:text-blue-500">Lokasi</a>
+          <a href="reports.html" class="hover:text-blue-500">Laporan</a>
+          <a href="settings.html" class="hover:text-blue-500">Pengaturan</a>
+        </div>
+        <div class="md:hidden">
+          <button id="menu-btn" class="focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <a href="index.html" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+      <button onclick="toggleDropdown('mobileServices')" class="w-full text-left px-4 py-2 hover:bg-gray-100 flex justify-between items-center">
+        Layanan
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+      <div id="mobileServices" class="hidden flex-col">
+        <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Daftar Layanan</a>
+        <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Tambah Layanan</a>
+        <a href="promo.html" class="block px-8 py-2 hover:bg-gray-100">Promo & Paket</a>
+      </div>
+      <a href="booking.html" class="block px-4 py-2 hover:bg-gray-100">Booking</a>
+      <a href="spareparts.html" class="block px-4 py-2 hover:bg-gray-100">Sparepart</a>
+      <a href="customers.html" class="block px-4 py-2 hover:bg-gray-100">Pelanggan</a>
+      <a href="locations.html" class="block px-4 py-2 hover:bg-gray-100">Lokasi</a>
+      <a href="reports.html" class="block px-4 py-2 hover:bg-gray-100">Laporan</a>
+      <a href="settings.html" class="block px-4 py-2 hover:bg-gray-100">Pengaturan</a>
+    </div>
+  </nav>
+
+  <!-- Section Daftar Layanan -->
+  <section class="max-w-7xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Daftar Layanan</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+        <h2 class="font-semibold text-lg">Servis Berkala</h2>
+        <p class="text-gray-600 mt-2">Cek dan ganti oli, tune-up mesin, pengecekan rutin.</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+        <h2 class="font-semibold text-lg">Ganti Ban</h2>
+        <p class="text-gray-600 mt-2">Penggantian ban standar dan premium, cepat dan profesional.</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+        <h2 class="font-semibold text-lg">Servis Body & Cat</h2>
+        <p class="text-gray-600 mt-2">Perbaikan body motor, poles, pengecatan ulang.</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+        <h2 class="font-semibold text-lg">Servis Elektrik</h2>
+        <p class="text-gray-600 mt-2">Perbaikan kelistrikan motor dan aksesori.</p>
+      </div>
+      <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+        <h2 class="font-semibold text-lg">Cuci Motor Premium</h2>
+        <p class="text-gray-600 mt-2">Cuci, poles, dan detailing motor secara profesional.</p>
+      </div>
+    </div>
+  </section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-6">Daftar Layanan Lengkap</h2>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    <!-- SERVIS BERKALA -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <div class="text-blue-600 text-4xl mb-3">🔧</div>
+      <h3 class="text-xl font-semibold mb-2">Servis Berkala</h3>
+      <p class="text-gray-600">Perawatan rutin termasuk pengecekan mesin, oli, dan filter.</p>
+      <p class="mt-3 text-blue-600 font-semibold">Mulai Rp 80.000</p>
+    </div>
+
+    <!-- GANTI OLI -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <div class="text-yellow-500 text-4xl mb-3">🛢️</div>
+      <h3 class="text-xl font-semibold mb-2">Ganti Oli Mesin</h3>
+      <p class="text-gray-600">Oli original pabrikan untuk menjaga performa mesin.</p>
+      <p class="mt-3 text-blue-600 font-semibold">Mulai Rp 50.000</p>
+    </div>
+
+    <!-- GANTI BAN -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <div class="text-green-600 text-4xl mb-3">🛞</div>
+      <h3 class="text-xl font-semibold mb-2">Ganti Ban</h3>
+      <p class="text-gray-600">Ban depan & belakang berbagai ukuran dan tipe.</p>
+      <p class="mt-3 text-blue-600 font-semibold">Mulai Rp 200.000</p>
+    </div>
+
+    <!-- SERVIS REM -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <div class="text-red-500 text-4xl mb-3">🛑</div>
+      <h3 class="text-xl font-semibold mb-2">Servis Rem</h3>
+      <p class="text-gray-600">Pengecekan kampas rem, minyak rem, dan kaliper.</p>
+      <p class="mt-3 text-blue-600 font-semibold">Mulai Rp 70.000</p>
+    </div>
+
+    <!-- SERVIS KAMPAS REM -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <div class="text-purple-600 text-4xl mb-3">🧩</div>
+      <h3 class="text-xl font-semibold mb-2">Ganti Kampas Rem</h3>
+      <p class="text-gray-600">Penggantian kampas rem depan & belakang original.</p>
+      <p class="mt-3 text-blue-600 font-semibold">Mulai Rp 60.000</p>
+    </div>
+
+    <!-- SERVIS INJEKTOR -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <div class="text-orange-500 text-4xl mb-3">💉</div>
+      <h3 class="text-xl font-semibold mb-2">Servis Injector</h3>
+      <p class="text-gray-600">Pembersihan injector untuk performa mesin optimal.</p>
+      <p class="mt-3 text-blue-600 font-semibold">Rp 150.000</p>
+    </div>
+
+    <!-- SERVIS KARBU -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <div class="text-blue-500 text-4xl mb-3">⚙️</div>
+      <h3 class="text-xl font-semibold mb-2">Servis Karburator</h3>
+      <p class="text-gray-600">Pembersihan karburator untuk tarikan lebih halus.</p>
+      <p class="mt-3 text-blue-600 font-semibold">Rp 120.000</p>
+    </div>
+
+    <!-- SERVIS KELISTRIKAN -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <div class="text-yellow-600 text-4xl mb-3">🔌</div>
+      <h3 class="text-xl font-semibold mb-2">Servis Kelistrikan</h3>
+      <p class="text-gray-600">Pengecekan aki, kabel, lampu, ECU, dan sensor.</p>
+      <p class="mt-3 text-blue-600 font-semibold">Mulai Rp 75.000</p>
+    </div>
+
+    <!-- SERVIS BODY DAN CAT -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <div class="text-red-400 text-4xl mb-3">🎨</div>
+      <h3 class="text-xl font-semibold mb-2">Body Repair & Cat</h3>
+      <p class="text-gray-600">Cat ulang, poles, detailing, dan perbaikan body motor.</p>
+      <p class="mt-3 text-blue-600 font-semibold">Rp 300.000 - 1.500.000</p>
+    </div>
+
+    <!-- CUCI MOTOR PREMIUM -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <div class="text-cyan-600 text-4xl mb-3">🫧</div>
+      <h3 class="text-xl font-semibold mb-2">Cuci Motor Premium</h3>
+      <p class="text-gray-600">Cuci motor full detailing dengan bahan premium.</p>
+      <p class="mt-3 text-blue-600 font-semibold">Rp 40.000</p>
+    </div>
+
+    <!-- SERVIS SHOCKBREAKER -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <div class="text-pink-500 text-4xl mb-3">🛠️</div>
+      <h3 class="text-xl font-semibold mb-2">Servis Shockbreaker</h3>
+      <p class="text-gray-600">Pengecekan shock depan & belakang, oli shock, kebocoran.</p>
+      <p class="mt-3 text-blue-600 font-semibold">Rp 120.000</p>
+    </div>
+
+    <!-- GANTI AKI -->
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <div class="text-green-500 text-4xl mb-3">🔋</div>
+      <h3 class="text-xl font-semibold mb-2">Ganti Aki</h3>
+      <p class="text-gray-600">Aki kering & aki MF original dengan garansi resmi.</p>
+      <p class="mt-3 text-blue-600 font-semibold">Rp 150.000 - 350.000</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-6">Daftar Layanan Detail</h2>
+  <div class="space-y-4">
+
+    <div class="flex items-start justify-between p-4 bg-white border rounded-lg shadow">
+      <div>
+        <h3 class="text-lg font-semibold">Tune Up Lengkap</h3>
+        <p class="text-gray-600">Pembersihan filter, injektor/karburator, dan penyesuaian mesin.</p>
+      </div>
+      <p class="font-semibold text-blue-600">Rp 120.000</p>
+    </div>
+
+    <div class="flex items-start justify-between p-4 bg-white border rounded-lg shadow">
+      <div>
+        <h3 class="text-lg font-semibold">Pengecekan Sistem Pendingin</h3>
+        <p class="text-gray-600">Radiator, coolant, kipas pendingin, sensor suhu.</p>
+      </div>
+      <p class="font-semibold text-blue-600">Rp 80.000</p>
+    </div>
+
+    <div class="flex items-start justify-between p-4 bg-white border rounded-lg shadow">
+      <div>
+        <h3 class="text-lg font-semibold">Pengecekan Rantai & Gear</h3>
+        <p class="text-gray-600">Penyesuaian, pelumasan, ganti rantai dan gearset.</p>
+      </div>
+      <p class="font-semibold text-blue-600">Rp 70.000</p>
+    </div>
+
+    <div class="flex items-start justify-between p-4 bg-white border rounded-lg shadow">
+      <div>
+        <h3 class="text-lg font-semibold">Servis Shockbreaker</h3>
+        <p class="text-gray-600">Oli shock, perbaikan kebocoran, pengecekan seal.</p>
+      </div>
+      <p class="font-semibold text-blue-600">Rp 140.000</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12 bg-gray-50 rounded-xl shadow">
+  <h2 class="text-2xl font-bold mb-6">Paket Servis Hemat</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <h3 class="text-xl font-semibold">Paket Hemat A</h3>
+      <ul class="text-gray-600 mt-3 space-y-2">
+        <li>✔ Ganti Oli</li>
+        <li>✔ Cek Rem</li>
+        <li>✔ Cuci Motor</li>
+      </ul>
+      <p class="mt-4 font-bold text-blue-600">Rp 130.000</p>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <h3 class="text-xl font-semibold">Paket Hemat B</h3>
+      <ul class="text-gray-600 mt-3 space-y-2">
+        <li>✔ Ganti Oli</li>
+        <li>✔ Poles Body</li>
+        <li>✔ Servis Injektor</li>
+      </ul>
+      <p class="mt-4 font-bold text-blue-600">Rp 300.000</p>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <h3 class="text-xl font-semibold">Paket Premium</h3>
+      <ul class="text-gray-600 mt-3 space-y-2">
+        <li>✔ Tune Up Full</li>
+        <li>✔ Ganti Oli Premium</li>
+        <li>✔ Body & Cat</li>
+      </ul>
+      <p class="mt-4 font-bold text-blue-600">Rp 900.000</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-6">Layanan Populer Minggu Ini</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded">Paling Banyak</span>
+      <h3 class="text-xl font-semibold mt-3">Servis Berkala</h3>
+      <p class="text-gray-500">Booking: 62 pelanggan</p>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded">Rekomended</span>
+      <h3 class="text-xl font-semibold mt-3">Ganti Ban</h3>
+      <p class="text-gray-500">Booking: 48 pelanggan</p>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded">Rating Tinggi</span>
+      <h3 class="text-xl font-semibold mt-3">Servis Rem</h3>
+      <p class="text-gray-500">Rating: 4.9 / 5</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-6">Filter Layanan</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+    <!-- SIDEBAR -->
+    <aside class="p-6 bg-white border rounded-lg shadow h-max">
+      <h3 class="font-semibold text-lg mb-4">Kategori</h3>
+      <ul class="space-y-2 text-gray-600">
+        <li>• Perawatan Mesin</li>
+        <li>• Kelistrikan</li>
+        <li>• Body & Cat</li>
+        <li>• Ban & Rem</li>
+        <li>• Aksesoris</li>
+      </ul>
+    </aside>
+
+    <!-- DAFTAR -->
+    <div class="md:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+        <h3 class="font-semibold text-lg">Tune Up Lengkap</h3>
+        <p class="text-gray-600 mt-2">Penyesuaian mesin & pembersihan part penting.</p>
+      </div>
+
+      <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+        <h3 class="font-semibold text-lg">Servis Elektrik</h3>
+        <p class="text-gray-600 mt-2">Aki, kabel, sensor, lampu, ECU.</p>
+      </div>
+
+      <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+        <h3 class="font-semibold text-lg">Perbaikan Body</h3>
+        <p class="text-gray-600 mt-2">Perbaikan body retak, baret, & cover motor.</p>
+      </div>
+
+      <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+        <h3 class="font-semibold text-lg">Pengecatan Ulang</h3>
+        <p class="text-gray-600 mt-2">Full repaint & cat premium.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12">
+  <h2 class="text-2xl font-bold mb-6">Layanan Profesional</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <svg class="w-12 h-12 text-blue-600 mb-3" fill="none" stroke="currentColor" stroke-width="2"
+        viewBox="0 0 24 24">
+        <path d="M9 17v-6h6v6m-7-8V7a2 2 0 012-2h4a2 2 0 012 2v2"></path>
+      </svg>
+      <h3 class="text-xl font-semibold mb-2">Perbaikan Mesin</h3>
+      <p class="text-gray-600">Diagnosa mesin lengkap & perbaikan komponen internal.</p>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <svg class="w-12 h-12 text-blue-600 mb-3" fill="none" stroke="currentColor" stroke-width="2"
+        viewBox="0 0 24 24">
+        <path d="M5 12h14M5 12l4 4m-4-4l4-4"></path>
+      </svg>
+      <h3 class="text-xl font-semibold mb-2">Spooring Motor</h3>
+      <p class="text-gray-600">Penyesuaian roda agar motor stabil & tidak goyang.</p>
+    </div>
+
+    <div class="p-6 bg-white border rounded-lg shadow hover:shadow-xl transition">
+      <svg class="w-12 h-12 text-blue-600 mb-3" fill="none" stroke="currentColor" stroke-width="2"
+        viewBox="0 0 24 24">
+        <path d="M12 6v6l4 2"></path>
+      </svg>
+      <h3 class="text-xl font-semibold mb-2">Engine Flush</h3>
+      <p class="text-gray-600">Pembersihan kerak mesin tanpa bongkar.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="max-w-7xl mx-auto px-4 py-12 overflow-x-auto scrollbar-hide">
+  <h2 class="text-2xl font-bold mb-6">Layanan Unggulan</h2>
+
+  <div class="flex space-x-6">
+
+    <div class="min-w-[260px] p-6 bg-white border rounded-lg shadow">
+      <h3 class="font-semibold text-lg">Poles Body Premium</h3>
+      <p class="text-gray-600 mt-2">Kilap tahan lama, perlindungan cat.</p>
+    </div>
+
+    <div class="min-w-[260px] p-6 bg-white border rounded-lg shadow">
+      <h3 class="font-semibold text-lg">Cuci Detailing</h3>
+      <p class="text-gray-600 mt-2">Pembersihan mendalam, hasil seperti baru.</p>
+    </div>
+
+    <div class="min-w-[260px] p-6 bg-white border rounded-lg shadow">
+      <h3 class="font-semibold text-lg">Pengecekan Komputer</h3>
+      <p class="text-gray-600 mt-2">Scan ECU untuk identifikasi masalah.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="px-4 py-20 bg-cover bg-center text-white rounded-xl shadow"
+  style="background-image: url('assets/images/layanan-premium.jpg');">
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="text-3xl font-bold mb-4">Layanan Premium</h2>
+    <p class="text-lg mb-6 opacity-90">
+      Perawatan khusus motor premium, detailing, dan perbaikan tingkat lanjut.
+    </p>
+    <button class="px-6 py-3 bg-blue-600 rounded shadow hover:bg-blue-700">
+      Lihat Detail Layanan
+    </button>
+  </div>
+</section>
+
+
+  <script>
+    // Hamburger toggle
+    const btn = document.getElementById('menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+    // Dropdown toggle
+    function toggleDropdown(id){
+      const el = document.getElementById(id);
+      el.classList.toggle('hidden');
+    }
+  </script>
+</body>
+</html>

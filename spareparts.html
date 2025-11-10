@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sparepart — Dealer Motor</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- Navbar -->
+<nav class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between h-16 items-center">
+      <a href="index.html" class="text-2xl font-bold">Dealer Motor</a>
+      <div class="hidden md:flex space-x-4 items-center">
+        <a href="index.html" class="hover:text-blue-500">Dashboard</a>
+        <div class="relative">
+          <button onclick="toggleDropdown('servicesDropdown')" class="hover:text-blue-500 flex items-center">
+            Layanan
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="servicesDropdown" class="absolute left-0 mt-1 hidden bg-white border shadow-md rounded z-10">
+            <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Daftar Layanan</a>
+            <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Tambah Layanan</a>
+            <a href="promo.html" class="block px-4 py-2 hover:bg-gray-100">Promo & Paket</a>
+          </div>
+        </div>
+        <a href="booking.html" class="hover:text-blue-500">Booking</a>
+        <a href="spareparts.html" class="hover:text-blue-500">Sparepart</a>
+        <a href="customers.html" class="hover:text-blue-500">Pelanggan</a>
+        <a href="locations.html" class="hover:text-blue-500">Lokasi</a>
+        <a href="reports.html" class="hover:text-blue-500">Laporan</a>
+        <a href="settings.html" class="hover:text-blue-500">Pengaturan</a>
+      </div>
+      <div class="md:hidden">
+        <button id="menu-btn" class="focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+    <a href="index.html" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+    <button onclick="toggleDropdown('mobileServices')" class="w-full text-left px-4 py-2 hover:bg-gray-100 flex justify-between items-center">
+      Layanan
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+      </svg>
+    </button>
+    <div id="mobileServices" class="hidden flex-col">
+      <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Daftar Layanan</a>
+      <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Tambah Layanan</a>
+      <a href="promo.html" class="block px-8 py-2 hover:bg-gray-100">Promo & Paket</a>
+    </div>
+    <a href="booking.html" class="block px-4 py-2 hover:bg-gray-100">Booking</a>
+    <a href="spareparts.html" class="block px-4 py-2 hover:bg-gray-100">Sparepart</a>
+    <a href="customers.html" class="block px-4 py-2 hover:bg-gray-100">Pelanggan</a>
+    <a href="locations.html" class="block px-4 py-2 hover:bg-gray-100">Lokasi</a>
+    <a href="reports.html" class="block px-4 py-2 hover:bg-gray-100">Laporan</a>
+    <a href="settings.html" class="block px-4 py-2 hover:bg-gray-100">Pengaturan</a>
+  </div>
+</nav>
+
+<section class="p-6 bg-white rounded-2xl shadow-lg mb-10">
+  <h2 class="text-2xl font-semibold mb-5">Menu Sparepart</h2>
+
+  <!-- LIST SPAREPART -->
+  <div id="sparepartList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+  <!-- KERANJANG -->
+  <div id="keranjangSection" class="hidden mt-10 p-6 bg-gray-50 rounded-2xl shadow-inner border">
+    <h3 class="text-xl font-semibold mb-4">Keranjang Kamu</h3>
+    <div id="keranjangList" class="space-y-4 mb-4"></div>
+
+    <div class="flex justify-between text-xl font-bold border-t pt-4">
+      <span>Total:</span>
+      <span>Rp <span id="totalHarga">0</span></span>
+    </div>
+
+    <button onclick="showPembayaran()"
+      class="mt-6 w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition">
+      Lanjut ke Pembayaran
+    </button>
+  </div>
+
+  <!-- PEMBAYARAN -->
+  <div id="pembayaranSection" class="hidden mt-10 p-6 bg-blue-50 rounded-2xl shadow-inner border">
+    <h3 class="text-xl font-semibold mb-4">Metode Pembayaran</h3>
+
+    <select id="metode" onchange="tampilkanMetode()"
+      class="w-full p-3 border rounded-xl mb-4 shadow-sm focus:ring-2 focus:ring-blue-400">
+      <option value="">-- Pilih Metode --</option>
+      <option value="Cash">Cash</option>
+      <option value="OVO">OVO</option>
+      <option value="DANA">DANA</option>
+      <option value="GoPay">GoPay</option>
+      <option value="Transfer Bank">Transfer Bank</option>
+    </select>
+
+    <!-- DETAIL METODE PEMBAYARAN -->
+    <div id="detailPembayaran" class="hidden p-4 bg-white border rounded-xl shadow mb-4"></div>
+
+    <!-- ALAMAT -->
+    <div class="mb-4">
+      <label class="font-semibold">Alamat Lengkap</label>
+      <textarea id="alamat" class="w-full mt-2 p-3 border rounded-xl shadow-sm focus:ring-2 focus:ring-green-400"
+        placeholder="Masukkan alamat lengkap pelanggan..."></textarea>
+    </div>
+
+    <button onclick="checkout()" class="w-full bg-green-600 text-white py-3 rounded-xl font-semibold hover:bg-green-700 transition">
+      Checkout Sekarang
+    </button>
+  </div>
+
+  <!-- HASIL CHECKOUT -->
+  <div id="checkoutResult" class="hidden mt-10 p-6 bg-green-50 rounded-2xl shadow-inner border text-center">
+    <h3 class="text-xl font-semibold mb-2">Checkout Berhasil</h3>
+    <p class="text-lg">Pesanan berhasil diproses. Terima kasih!</p>
+  </div>
+</section>
+
+<style>
+.card-part {
+  @apply bg-white p-6 rounded-2xl border shadow-md transition cursor-pointer;
+}
+.card-part:hover {
+  @apply shadow-2xl -translate-y-1;
+}
+.btn-primary {
+  @apply bg-blue-600 text-white py-2 rounded-xl font-semibold hover:bg-blue-700 transition shadow;
+}
+</style>
+
+<script>
+// DATA SPAREPART
+const spareparts = [
+  { id:1, nama:"Filter Oli", harga:35000, stok:12, img:"https://i.ibb.co/6m2y2xC/filter.png" },
+  { id:2, nama:"Kampas Rem", harga:55000, stok:8, img:"https://i.ibb.co/8KP4f2b/brake.png" },
+  { id:3, nama:"Busi Motor", harga:25000, stok:20, img:"https://i.ibb.co/0mMC7mR/sparkplug.png" },
+  { id:4, nama:"Oli Mesin", harga:45000, stok:15, img:"https://i.ibb.co/MVQsn8g/oil.png" },
+  { id:5, nama:"Aki Motor", harga:160000, stok:5, img:"https://i.ibb.co/Kyt8f3v/battery.png" },
+  { id:6, nama:"Ban Luar Motor", harga:220000, stok:9, img:"https://i.ibb.co/QpThPXq/tire.png" },
+];
+
+let keranjang = [];
+
+// TAMPILKAN SPAREPART
+function loadSparepart(){
+  sparepartList.innerHTML = spareparts.map(s => `
+    <div class="card-part">
+      <img src="${s.img}" class="w-full h-40 object-contain mb-4">
+      <h4 class="text-lg font-semibold">${s.nama}</h4>
+      <p class="text-gray-700 mt-1"><b>Rp ${s.harga.toLocaleString()}</b></p>
+      <p class="text-sm text-gray-500 mb-4">Stok ${s.stok}</p>
+
+      <button onclick="tambahKeranjang(${s.id})" class="btn-primary w-full">
+        Tambah ke Keranjang
+      </button>
+    </div>
+  `).join("");
+}
+
+// TAMBAH KE KERANJANG
+function tambahKeranjang(id){
+  let item = spareparts.find(s => s.id === id);
+  let ada = keranjang.find(k => k.id === id);
+
+  if(ada){ ada.qty++; }
+  else { keranjang.push({ id:item.id, nama:item.nama, harga:item.harga, qty:1 }); }
+
+  renderKeranjang();
+  keranjangSection.classList.remove("hidden");
+  pembayaranSection.classList.add("hidden");
+  checkoutResult.classList.add("hidden");
+}
+
+// TAMPILKAN KERANJANG
+function renderKeranjang(){
+  let total = 0;
+
+  keranjangList.innerHTML = keranjang.map(k => {
+    let subtotal = k.qty * k.harga;
+    total += subtotal;
+    return `
+      <div class="flex justify-between items-center bg-white p-4 rounded-xl shadow border">
+        <div>
+          <p class="font-semibold">${k.nama}</p>
+          <p class="text-sm text-gray-500">Qty: ${k.qty}</p>
+        </div>
+        <p class="font-semibold">Rp ${subtotal.toLocaleString()}</p>
+      </div>
+    `;
+  }).join("");
+
+  totalHarga.innerText = total.toLocaleString();
+}
+
+// MASUK KE PEMBAYARAN
+function showPembayaran(){
+  pembayaranSection.classList.remove("hidden");
+  checkoutResult.classList.add("hidden");
+}
+
+// METODE PEMBAYARAN DETAIL
+function tampilkanMetode(){
+  const metode = document.getElementById("metode").value;
+  const detail = document.getElementById("detailPembayaran");
+
+  detail.classList.remove("hidden");
+
+  if(metode === "DANA"){
+    detail.innerHTML = `
+      <p class="font-semibold mb-2">Pembayaran DANA</p>
+      <p>No DANA: <b>0895-1234-5678</b></p>
+
+      <p class="mt-3 font-semibold">QRIS Pembayaran:</p>
+      <img src="https://i.ibb.co/fHHrSzt/qris-example.png"
+           class="w-48 mx-auto mt-2 rounded-xl border shadow">
+    `;
+  }
+  else if(metode === "OVO"){
+    detail.innerHTML = `
+      <p class="font-semibold mb-2">Pembayaran OVO</p>
+      <p>No OVO: <b>0812-3456-7890</b></p>
+    `;
+  }
+  else if(metode === "GoPay"){
+    detail.innerHTML = `
+      <p class="font-semibold mb-2">Pembayaran GoPay</p>
+      <p>No GoPay: <b>0857-9876-5432</b></p>
+    `;
+  }
+  else if(metode === "Transfer Bank"){
+    detail.innerHTML = `
+      <p class="font-semibold mb-2">Transfer Bank</p>
+      <p>Bank BCA</p>
+      <p>No Rekening: <b>1234567890</b></p>
+      <p>a.n Bengkel Motor</p>
+    `;
+  }
+  else {
+    detail.classList.add("hidden");
+  }
+}
+
+// CHECKOUT
+function checkout(){
+  keranjang = [];
+  renderKeranjang();
+
+  keranjangSection.classList.add("hidden");
+  pembayaranSection.classList.add("hidden");
+  checkoutResult.classList.remove("hidden");
+}
+
+loadSparepart();
+</script>
+
+<section class="p-6 bg-white rounded-2xl shadow-lg mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Kategori Sparepart</h2>
+
+  <div class="flex flex-wrap gap-3">
+    <button onclick="filterKategori('all')" class="px-4 py-2 bg-blue-600 text-white rounded-xl shadow">Semua</button>
+    <button onclick="filterKategori('oli')" class="px-4 py-2 bg-gray-100 rounded-xl shadow">Oli</button>
+    <button onclick="filterKategori('busi')" class="px-4 py-2 bg-gray-100 rounded-xl shadow">Busi</button>
+    <button onclick="filterKategori('rem')" class="px-4 py-2 bg-gray-100 rounded-xl shadow">Kampas Rem</button>
+    <button onclick="filterKategori('aki')" class="px-4 py-2 bg-gray-100 rounded-xl shadow">Aki</button>
+    <button onclick="filterKategori('ban')" class="px-4 py-2 bg-gray-100 rounded-xl shadow">Ban</button>
+  </div>
+</section>
+
+<script>
+// kategori sudah dipasang di objek sparepart
+function filterKategori(kat){
+  if(kat === "all"){
+    loadSparepart();
+    return;
+  }
+  sparepartList.innerHTML = spareparts
+    .filter(s => s.kategori === kat)
+    .map(s => cardSparepart(s))
+    .join("");
+}
+</script>
+
+<!-- MODAL DETAIL PRODUK -->
+<div id="modalDetail" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+  <div class="bg-white w-11/12 sm:w-1/2 p-6 rounded-2xl shadow-lg relative">
+    
+    <button onclick="closeDetail()" class="absolute top-3 right-3 text-gray-500 text-2xl">&times;</button>
+
+    <img id="detailImg" class="w-full h-48 object-contain mb-4">
+    <h3 id="detailNama" class="text-xl font-semibold"></h3>
+    <p id="detailHarga" class="text-lg mt-2 text-blue-600 font-bold"></p>
+    <p id="detailStok" class="text-gray-500 mt-1"></p>
+    <p id="detailDesc" class="text-gray-700 mt-4"></p>
+
+    <button id="btnDetailTambah" class="mt-6 w-full bg-blue-600 text-white py-3 rounded-xl font-semibold">Tambah ke Keranjang</button>
+  </div>
+</div>
+
+<script>
+function openDetail(id){
+  const s = spareparts.find(x => x.id === id);
+
+  detailImg.src = s.img;
+  detailNama.innerText = s.nama;
+  detailHarga.innerText = "Rp " + s.harga.toLocaleString();
+  detailStok.innerText = "Stok: " + s.stok;
+  detailDesc.innerText = s.deskripsi || "Tidak ada deskripsi.";
+
+  btnDetailTambah.onclick = ()=> tambahKeranjang(id);
+
+  modalDetail.classList.remove("hidden");
+}
+function closeDetail(){
+  modalDetail.classList.add("hidden");
+}
+</script>
+
+<section class="p-6 bg-white rounded-2xl shadow-lg mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Manajemen Stok Sparepart (Admin)</h2>
+
+  <div id="stokList" class="space-y-4"></div>
+</section>
+
+<script>
+function loadStokAdmin(){
+  stokList.innerHTML = spareparts.map(s => `
+    <div class="flex justify-between items-center p-4 bg-gray-50 rounded-xl shadow">
+      <div>
+        <p class="font-semibold">${s.nama}</p>
+        <p class="text-gray-500 text-sm">Stok: ${s.stok}</p>
+      </div>
+
+      <div class="flex gap-2">
+        <button onclick="updateStok(${s.id}, 1)" class="px-3 py-2 bg-green-500 text-white rounded-xl">+1</button>
+        <button onclick="updateStok(${s.id}, -1)" class="px-3 py-2 bg-red-500 text-white rounded-xl">-1</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function updateStok(id, tambah){
+  const s = spareparts.find(x => x.id === id);
+  s.stok += tambah;
+  if(s.stok < 0) s.stok = 0;
+  loadStokAdmin();
+  loadSparepart();
+}
+loadStokAdmin();
+</script>
+
+<section class="p-6 bg-white rounded-2xl shadow-lg mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Tambah Sparepart Baru (Admin)</h2>
+
+  <div class="grid gap-4">
+    <input id="newNama" class="input-style" placeholder="Nama sparepart">
+    <input id="newHarga" type="number" class="input-style" placeholder="Harga">
+    <input id="newStok" type="number" class="input-style" placeholder="Stok awal">
+    <input id="newImg" class="input-style" placeholder="URL gambar">
+    <input id="newKategori" class="input-style" placeholder="Kategori (oli/rem/ban)">
+  </div>
+
+  <button onclick="tambahSparepart()"
+    class="mt-4 w-full bg-blue-600 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition">
+    Tambahkan
+  </button>
+</section>
+
+<script>
+function tambahSparepart(){
+  spareparts.push({
+    id: spareparts.length + 1,
+    nama: newNama.value,
+    harga: parseInt(newHarga.value),
+    stok: parseInt(newStok.value),
+    img: newImg.value,
+    kategori: newKategori.value,
+  });
+
+  loadSparepart();
+  loadStokAdmin();
+
+  alert("Sparepart berhasil ditambahkan!");
+}
+</script>
+
+
+<!-- Section Spareparts -->
+<section class="max-w-7xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Daftar Sparepart</h1>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <h2 class="font-semibold text-lg">Oli Mesin</h2>
+      <p class="text-gray-600 mt-2">Oli standar dan premium untuk semua tipe motor.</p>
+      <p class="text-gray-800 font-semibold mt-1">Rp 50.000</p>
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <h2 class="font-semibold text-lg">Ban Depan</h2>
+      <p class="text-gray-600 mt-2">Ban depan motor standar dan premium.</p>
+      <p class="text-gray-800 font-semibold mt-1">Rp 200.000</p>
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <h2 class="font-semibold text-lg">Ban Belakang</h2>
+      <p class="text-gray-600 mt-2">Ban belakang motor, kualitas terbaik.</p>
+      <p class="text-gray-800 font-semibold mt-1">Rp 250.000</p>
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <h2 class="font-semibold text-lg">Busi Motor</h2>
+      <p class="text-gray-600 mt-2">Busi standar & racing semua merek.</p>
+      <p class="text-gray-800 font-semibold mt-1">Rp 30.000</p>
+    </div>
+  </div>
+</section>
+
+<script>
+const btn = document.getElementById('menu-btn');
+const menu = document.getElementById('mobile-menu');
+btn.addEventListener('click', ()=>menu.classList.toggle('hidden'));
+function toggleDropdown(id){ document.getElementById(id).classList.toggle('hidden'); }
+</script>
+</body>
+</html>

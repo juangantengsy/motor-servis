@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pelanggan — Dealer Motor</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- Navbar sama seperti halaman lain -->
+ <!-- Navbar -->
+<nav class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between h-16 items-center">
+      <a href="index.html" class="text-2xl font-bold">Dealer Motor</a>
+      <div class="hidden md:flex space-x-4 items-center">
+        <a href="index.html" class="hover:text-blue-500">Dashboard</a>
+        <div class="relative">
+          <button onclick="toggleDropdown('servicesDropdown')" class="hover:text-blue-500 flex items-center">
+            Layanan
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="servicesDropdown" class="absolute left-0 mt-1 hidden bg-white border shadow-md rounded z-10">
+            <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Daftar Layanan</a>
+            <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Tambah Layanan</a>
+            <a href="promo.html" class="block px-4 py-2 hover:bg-gray-100">Promo & Paket</a>
+          </div>
+        </div>
+        <a href="booking.html" class="hover:text-blue-500">Booking</a>
+        <a href="spareparts.html" class="hover:text-blue-500">Sparepart</a>
+        <a href="customers.html" class="hover:text-blue-500">Pelanggan</a>
+        <a href="locations.html" class="hover:text-blue-500">Lokasi</a>
+        <a href="reports.html" class="hover:text-blue-500">Laporan</a>
+        <a href="settings.html" class="hover:text-blue-500">Pengaturan</a>
+      </div>
+      <div class="md:hidden">
+        <button id="menu-btn" class="focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+    <a href="index.html" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+    <button onclick="toggleDropdown('mobileServices')" class="w-full text-left px-4 py-2 hover:bg-gray-100 flex justify-between items-center">
+      Layanan
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+      </svg>
+    </button>
+    <div id="mobileServices" class="hidden flex-col">
+      <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Daftar Layanan</a>
+      <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Tambah Layanan</a>
+      <a href="promo.html" class="block px-8 py-2 hover:bg-gray-100">Promo & Paket</a>
+    </div>
+    <a href="booking.html" class="block px-4 py-2 hover:bg-gray-100">Booking</a>
+    <a href="spareparts.html" class="block px-4 py-2 hover:bg-gray-100">Sparepart</a>
+    <a href="customers.html" class="block px-4 py-2 hover:bg-gray-100">Pelanggan</a>
+    <a href="locations.html" class="block px-4 py-2 hover:bg-gray-100">Lokasi</a>
+    <a href="reports.html" class="block px-4 py-2 hover:bg-gray-100">Laporan</a>
+    <a href="settings.html" class="block px-4 py-2 hover:bg-gray-100">Pengaturan</a>
+  </div>
+</nav>
+
+<section class="p-6 bg-white rounded-2xl shadow-lg mb-10">
+  <h2 class="text-2xl font-semibold mb-4">Menu Pelanggan</h2>
+
+  <!-- FORM TAMBAH PELANGGAN -->
+  <div class="p-4 bg-gray-50 rounded-xl border shadow mb-6">
+    <h3 class="font-semibold text-lg mb-3">Tambah Pelanggan Baru</h3>
+
+    <div class="grid gap-3">
+      <input id="pNama" class="p-3 border rounded-xl" placeholder="Nama pelanggan">
+      <input id="pTelp" class="p-3 border rounded-xl" placeholder="No Telepon">
+      <input id="pMotor" class="p-3 border rounded-xl" placeholder="Jenis motor">
+      <input id="pPlat" class="p-3 border rounded-xl" placeholder="No Plat Motor">
+    </div>
+
+    <button onclick="tambahPelanggan()"
+      class="mt-4 bg-blue-600 w-full py-3 text-white rounded-xl font-semibold hover:bg-blue-700 transition">
+      Tambah Pelanggan
+    </button>
+  </div>
+
+  <!-- LIST PELANGGAN -->
+  <h3 class="text-xl font-semibold mb-3">Daftar Pelanggan</h3>
+  <div id="pelangganList" class="space-y-4"></div>
+</section>
+
+<script>
+// DATA PELANGGAN
+let pelanggan = [
+  { id:1, nama:"Budi", telp:"08123456789", motor:"Beat ESP 2022", plat:"AB 1234 CD" },
+  { id:2, nama:"Rian", telp:"085712345678", motor:"Vario 125", plat:"B 4321 EF" }
+];
+
+// TAMPILKAN DATA PELANGGAN
+function loadPelanggan(){
+  pelangganList.innerHTML = pelanggan.map(p => `
+    <div class="p-4 bg-white border rounded-xl shadow flex justify-between items-start">
+      
+      <div>
+        <p class="text-lg font-semibold">${p.nama}</p>
+        <p class="text-gray-600 text-sm">Telp: ${p.telp}</p>
+        <p class="text-gray-600 text-sm">Motor: ${p.motor}</p>
+        <p class="text-gray-600 text-sm">Plat: ${p.plat}</p>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <button onclick="editPelanggan(${p.id})"
+          class="px-4 py-1 bg-yellow-500 text-white rounded-lg">Edit</button>
+
+        <button onclick="hapusPelanggan(${p.id})"
+          class="px-4 py-1 bg-red-600 text-white rounded-lg">Hapus</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+// TAMBAH PELANGGAN
+function tambahPelanggan(){
+  pelanggan.push({
+    id: pelanggan.length + 1,
+    nama: pNama.value,
+    telp: pTelp.value,
+    motor: pMotor.value,
+    plat: pPlat.value
+  });
+
+  pNama.value = "";
+  pTelp.value = "";
+  pMotor.value = "";
+  pPlat.value = "";
+
+  loadPelanggan();
+  alert("Pelanggan berhasil ditambahkan");
+}
+
+// EDIT PELANGGAN
+function editPelanggan(id){
+  const p = pelanggan.find(x => x.id === id);
+
+  let namaBaru = prompt("Nama baru:", p.nama);
+  let telpBaru = prompt("No Telepon baru:", p.telp);
+  let motorBaru = prompt("Jenis Motor baru:", p.motor);
+  let platBaru = prompt("Plat Motor baru:", p.plat);
+
+  if(namaBaru) p.nama = namaBaru;
+  if(telpBaru) p.telp = telpBaru;
+  if(motorBaru) p.motor = motorBaru;
+  if(platBaru) p.plat = platBaru;
+
+  loadPelanggan();
+}
+
+// HAPUS PELANGGAN
+function hapusPelanggan(id){
+  pelanggan = pelanggan.filter(x => x.id !== id);
+  loadPelanggan();
+}
+
+loadPelanggan();
+</script>
+
+<section class="bg-white shadow-lg rounded-2xl p-6">
+  <h2 class="text-xl font-semibold mb-4 border-b pb-2">Profil Pelanggan</h2>
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <p class="text-sm text-gray-500">Nama Lengkap</p>
+      <p class="font-medium text-gray-800">Budi Santoso</p>
+    </div>
+    <div>
+      <p class="text-sm text-gray-500">Nomor Telepon</p>
+      <p class="font-medium text-gray-800">0812-3456-7890</p>
+    </div>
+    <div>
+      <p class="text-sm text-gray-500">Motor & Nomor Plat</p>
+      <p class="font-medium text-gray-800">Honda Beat - B 1234 CD</p>
+    </div>
+    <div>
+      <p class="text-sm text-gray-500">Status Member</p>
+      <span class="inline-block px-3 py-1 bg-yellow-100 text-yellow-700 text-sm font-semibold rounded-full">
+        Silver Member
+      </span>
+    </div>
+    <div class="col-span-2">
+      <p class="text-sm text-gray-500">Total Pengeluaran</p>
+      <p class="text-2xl font-bold text-indigo-600 mt-1">Rp 1.250.000</p>
+    </div>
+    <div class="col-span-2">
+      <p class="text-sm text-gray-500">Jadwal Servis Berikutnya</p>
+      <p class="font-medium text-green-600">12 Desember 2025</p>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gradient-to-br from-indigo-50 to-white shadow-xl rounded-3xl p-8 border border-indigo-100">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-800">Profil Pelanggan</h2>
+      <p class="text-sm text-gray-500">Informasi akun & kendaraan Anda</p>
+    </div>
+    <span class="inline-flex items-center gap-2 bg-yellow-100 text-yellow-700 font-semibold px-4 py-2 rounded-full shadow-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      Silver Member
+    </span>
+  </div>
+
+  <!-- Body -->
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="flex flex-col gap-1">
+      <span class="text-sm text-gray-500">Nama Lengkap</span>
+      <span class="text-lg font-semibold text-gray-800">Budi Santoso</span>
+    </div>
+    <div class="flex flex-col gap-1">
+      <span class="text-sm text-gray-500">Nomor Telepon</span>
+      <span class="text-lg font-semibold text-gray-800">0812-3456-7890</span>
+    </div>
+    <div class="flex flex-col gap-1">
+      <span class="text-sm text-gray-500">Motor & Nomor Plat</span>
+      <span class="text-lg font-semibold text-gray-800">Honda Beat — B 1234 CD</span>
+    </div>
+    <div class="flex flex-col gap-1">
+      <span class="text-sm text-gray-500">Jadwal Servis Berikutnya</span>
+      <span class="text-lg font-semibold text-green-600">12 Desember 2025</span>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="my-6 border-t border-gray-200"></div>
+
+  <!-- Footer -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+    <div>
+      <p class="text-sm text-gray-500">Total Pengeluaran</p>
+      <p class="text-3xl font-bold text-indigo-600">Rp 1.250.000</p>
+    </div>
+    <button class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-md transition">
+      Lihat Detail Riwayat
+    </button>
+  </div>
+</section>
+
+<section class="bg-white shadow-xl rounded-3xl p-8 border border-gray-100">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="text-2xl font-bold text-gray-800">Riwayat Servis</h2>
+      <p class="text-sm text-gray-500">Catatan servis motor Anda sebelumnya</p>
+    </div>
+    <button class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow transition">
+      + Tambah Servis
+    </button>
+  </div>
+
+  <!-- Tabel Riwayat -->
+  <div class="overflow-x-auto rounded-xl border border-gray-200">
+    <table class="min-w-full text-left text-sm text-gray-600">
+      <thead class="bg-indigo-50 text-gray-700 uppercase text-xs font-semibold">
+        <tr>
+          <th class="py-3 px-4">Tanggal</th>
+          <th class="py-3 px-4">Jenis Servis</th>
+          <th class="py-3 px-4">Sparepart</th>
+          <th class="py-3 px-4">Biaya</th>
+          <th class="py-3 px-4">Mekanik</th>
+          <th class="py-3 px-4 text-center">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Item 1 -->
+        <tr class="border-b hover:bg-gray-50 transition">
+          <td class="py-3 px-4 font-medium">05 Okt 2025</td>
+          <td class="py-3 px-4">Servis Lengkap</td>
+          <td class="py-3 px-4">Oli, Kampas Rem</td>
+          <td class="py-3 px-4 font-semibold text-gray-800">Rp 350.000</td>
+          <td class="py-3 px-4">Agus</td>
+          <td class="py-3 px-4 text-center">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
+              Selesai
+            </span>
+          </td>
+        </tr>
+        <!-- Item 2 -->
+        <tr class="border-b hover:bg-gray-50 transition">
+          <td class="py-3 px-4 font-medium">20 Sep 2025</td>
+          <td class="py-3 px-4">Ganti Oli</td>
+          <td class="py-3 px-4">Oli Yamalube</td>
+          <td class="py-3 px-4 font-semibold text-gray-800">Rp 80.000</td>
+          <td class="py-3 px-4">Rudi</td>
+          <td class="py-3 px-4 text-center">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-700">
+              Menunggu
+            </span>
+          </td>
+        </tr>
+        <!-- Item 3 -->
+        <tr class="hover:bg-gray-50 transition">
+          <td class="py-3 px-4 font-medium">02 Agu 2025</td>
+          <td class="py-3 px-4">Servis Ringan</td>
+          <td class="py-3 px-4">Filter Udara</td>
+          <td class="py-3 px-4 font-semibold text-gray-800">Rp 150.000</td>
+          <td class="py-3 px-4">Doni</td>
+          <td class="py-3 px-4 text-center">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">
+              Dalam Antrian
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="bg-white shadow-xl rounded-3xl p-8 border border-gray-100">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center gap-3">
+      <div class="p-3 bg-indigo-100 rounded-xl">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m0-4h.01M12 20h9" />
+        </svg>
+      </div>
+      <div>
+        <h2 class="text-2xl font-bold text-gray-800">Notifikasi Pelanggan</h2>
+        <p class="text-sm text-gray-500">Pengingat otomatis servis dan promo terbaru</p>
+      </div>
+    </div>
+    <button class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow transition">
+      Tandai Semua Dibaca
+    </button>
+  </div>
+
+  <!-- Notifikasi Cards -->
+  <div class="space-y-4">
+    <!-- Notifikasi 1 -->
+    <div class="flex items-start gap-4 p-4 bg-indigo-50 rounded-2xl border border-indigo-100 hover:bg-indigo-100 transition">
+      <div class="p-3 bg-white rounded-full shadow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <div class="flex-1">
+        <h3 class="font-semibold text-gray-800">Pengingat Servis Bulanan</h3>
+        <p class="text-sm text-gray-600">Sudah saatnya servis rutin untuk motor Anda.</p>
+        <span class="text-xs text-gray-500">Dikirim: 10 November 2025</span>
+      </div>
+    </div>
+
+    <!-- Notifikasi 2 -->
+    <div class="flex items-start gap-4 p-4 bg-green-50 rounded-2xl border border-green-100 hover:bg-green-100 transition">
+      <div class="p-3 bg-white rounded-full shadow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2l4 -4" />
+        </svg>
+      </div>
+      <div class="flex-1">
+        <h3 class="font-semibold text-gray-800">Booking Servis Disetujui</h3>
+        <p class="text-sm text-gray-600">Booking servis tanggal 15 November telah disetujui.</p>
+        <span class="text-xs text-gray-500">Dikirim: 09 November 2025</span>
+      </div>
+    </div>
+
+    <!-- Notifikasi 3 -->
+    <div class="flex items-start gap-4 p-4 bg-yellow-50 rounded-2xl border border-yellow-100 hover:bg-yellow-100 transition">
+      <div class="p-3 bg-white rounded-full shadow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m0-4h.01M12 20h9" />
+        </svg>
+      </div>
+      <div class="flex-1">
+        <h3 class="font-semibold text-gray-800">Pengingat Pajak STNK</h3>
+        <p class="text-sm text-gray-600">STNK motor Anda akan jatuh tempo 25 November.</p>
+        <span class="text-xs text-gray-500">Dikirim: 07 November 2025</span>
+      </div>
+    </div>
+
+    <!-- Notifikasi 4 -->
+    <div class="flex items-start gap-4 p-4 bg-blue-50 rounded-2xl border border-blue-100 hover:bg-blue-100 transition">
+      <div class="p-3 bg-white rounded-full shadow">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3v18h18" />
+        </svg>
+      </div>
+      <div class="flex-1">
+        <h3 class="font-semibold text-gray-800">Sparepart Siap Diambil</h3>
+        <p class="text-sm text-gray-600">Oli dan filter udara Anda sudah ready di bengkel.</p>
+        <span class="text-xs text-gray-500">Dikirim: 06 November 2025</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-white shadow-xl rounded-3xl p-8 border border-gray-100">
+  <!-- Header -->
+  <div class="mb-8 text-center">
+    <h2 class="text-3xl font-bold text-gray-800 mb-2">Booking Servis Motor</h2>
+    <p class="text-gray-500">Pilih jenis servis, jadwal, dan mekanik sesuai kebutuhan Anda</p>
+  </div>
+
+  <!-- Form Booking -->
+  <form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Jenis Servis -->
+    <div>
+      <label class="block text-sm font-semibold text-gray-700 mb-2">Jenis Servis</label>
+      <select id="service-type" class="w-full border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-500 p-3">
+        <option>Pilih jenis servis</option>
+        <option value="ringan">Servis Ringan - Rp150.000</option>
+        <option value="lengkap">Servis Lengkap - Rp350.000</option>
+        <option value="ganti-oli">Ganti Oli - Rp90.000</option>
+      </select>
+    </div>
+
+    <!-- Tanggal -->
+    <div>
+      <label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal Servis</label>
+      <input type="date" class="w-full border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-500 p-3">
+    </div>
+
+    <!-- Pilih Mekanik -->
+    <div>
+      <label class="block text-sm font-semibold text-gray-700 mb-2">Pilih Mekanik (Opsional)</label>
+      <select class="w-full border-gray-300 rounded-xl shadow-sm focus:ring-2 focus:ring-indigo-500 p-3">
+        <option>Tidak memilih</option>
+        <option>Mekanik Andi</option>
+        <option>Mekanik Rudi</option>
+        <option>Mekanik Sari</option>
+      </select>
+    </div>
+
+    <!-- Upload Foto -->
+    <div>
+      <label class="block text-sm font-semibold text-gray-700 mb-2">Upload Foto Motor (Opsional)</label>
+      <input type="file" class="w-full text-sm text-gray-500 border border-gray-300 rounded-xl cursor-pointer focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100">
+    </div>
+
+    <!-- Estimasi Harga -->
+    <div class="md:col-span-2">
+      <div class="p-4 bg-indigo-50 border border-indigo-100 rounded-2xl flex items-center justify-between">
+        <div>
+          <h4 class="font-semibold text-indigo-700 text-lg">Estimasi Biaya Servis</h4>
+          <p id="price-estimate" class="text-gray-700 mt-1">Silakan pilih jenis servis untuk estimasi harga</p>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Tombol Submit -->
+    <div class="md:col-span-2 text-center mt-6">
+      <button type="submit" class="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-lg transition">
+        Lanjutkan ke Pembayaran DP (QRIS)
+      </button>
+    </div>
+  </form>
+</section>
+
+<!-- Script Estimasi Otomatis -->
+<script>
+  const serviceType = document.getElementById('service-type');
+  const priceEstimate = document.getElementById('price-estimate');
+
+  serviceType.addEventListener('change', function() {
+    const value = this.value;
+    let text = "Silakan pilih jenis servis untuk estimasi harga";
+
+    if (value === 'ringan') text = "💡 Estimasi: Rp150.000 (Servis Ringan)";
+    if (value === 'lengkap') text = "💡 Estimasi: Rp350.000 (Servis Lengkap)";
+    if (value === 'ganti-oli') text = "💡 Estimasi: Rp90.000 (Ganti Oli)";
+
+    priceEstimate.textContent = text;
+  });
+</script>
+
+<section class="bg-gradient-to-br from-indigo-50 to-white shadow-xl rounded-3xl p-8 border border-gray-100">
+  <!-- Header -->
+  <div class="text-center mb-8">
+    <h2 class="text-3xl font-bold text-gray-800">Program Member & Loyalty</h2>
+    <p class="text-gray-500 mt-2">Kumpulkan poin dari setiap servis dan nikmati promo eksklusif</p>
+  </div>
+
+  <!-- Kartu Member -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Bronze -->
+    <div class="relative bg-gradient-to-r from-amber-200 to-yellow-100 rounded-2xl p-6 shadow-md hover:shadow-lg transition">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-bold text-amber-800">Bronze Member</h3>
+        <span class="bg-amber-500 text-white text-xs font-semibold px-3 py-1 rounded-full">Level 1</span>
+      </div>
+      <p class="text-sm text-gray-700 mt-2">Untuk pelanggan baru</p>
+
+      <div class="mt-6">
+        <div class="text-sm text-gray-700 mb-1">Progress Poin</div>
+        <div class="w-full bg-amber-100 rounded-full h-3">
+          <div class="bg-amber-500 h-3 rounded-full w-1/3"></div>
+        </div>
+        <p class="text-xs text-gray-600 mt-1">120 / 300 Poin</p>
+      </div>
+
+      <div class="mt-6 border-t border-amber-300 pt-4">
+        <ul class="text-sm text-gray-700 space-y-2">
+          <li>• Diskon 5% untuk servis</li>
+          <li>• Akses promo umum</li>
+          <li>• 1x undian bulanan</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Silver -->
+    <div class="relative bg-gradient-to-r from-gray-200 to-gray-100 rounded-2xl p-6 shadow-md hover:shadow-lg transition">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-bold text-gray-800">Silver Member</h3>
+        <span class="bg-gray-600 text-white text-xs font-semibold px-3 py-1 rounded-full">Level 2</span>
+      </div>
+      <p class="text-sm text-gray-700 mt-2">Untuk pelanggan aktif</p>
+
+      <div class="mt-6">
+        <div class="text-sm text-gray-700 mb-1">Progress Poin</div>
+        <div class="w-full bg-gray-200 rounded-full h-3">
+          <div class="bg-gray-600 h-3 rounded-full w-2/3"></div>
+        </div>
+        <p class="text-xs text-gray-600 mt-1">600 / 900 Poin</p>
+      </div>
+
+      <div class="mt-6 border-t border-gray-300 pt-4">
+        <ul class="text-sm text-gray-700 space-y-2">
+          <li>• Diskon 10% untuk servis</li>
+          <li>• Gratis cuci motor setiap 3x servis</li>
+          <li>• 2x undian bulanan</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Gold -->
+    <div class="relative bg-gradient-to-r from-yellow-400 to-amber-200 rounded-2xl p-6 shadow-md hover:shadow-xl transition">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-bold text-yellow-800">Gold Member</h3>
+        <span class="bg-yellow-700 text-white text-xs font-semibold px-3 py-1 rounded-full">Level 3</span>
+      </div>
+      <p class="text-sm text-gray-700 mt-2">Untuk pelanggan setia</p>
+
+      <div class="mt-6">
+        <div class="text-sm text-gray-700 mb-1">Progress Poin</div>
+        <div class="w-full bg-yellow-100 rounded-full h-3">
+          <div class="bg-yellow-600 h-3 rounded-full w-3/4"></div>
+        </div>
+        <p class="text-xs text-gray-600 mt-1">1200 / 1600 Poin</p>
+      </div>
+
+      <div class="mt-6 border-t border-yellow-300 pt-4">
+        <ul class="text-sm text-gray-700 space-y-2">
+          <li>• Diskon 20% untuk servis</li>
+          <li>• Gratis oli setiap 5x servis</li>
+          <li>• 3x undian bulanan</li>
+          <li>• Akses prioritas booking</li>
+        </ul>
+      </div>
+
+      <!-- Badge -->
+      <div class="absolute top-3 right-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-yellow-700" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2l2.09 6.26H20l-5.17 3.76 1.97 6.11L12 15.77 7.2 18.13l1.97-6.11L4 8.26h5.91L12 2z"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Promo Banner -->
+  <div class="mt-10 text-center bg-indigo-600 text-white rounded-2xl py-6 shadow-lg">
+    <h3 class="text-2xl font-bold mb-2">🎉 Bonus 50 Poin untuk Servis Minggu Ini!</h3>
+    <p class="text-sm text-indigo-100">Promo berlaku sampai 17 November 2025</p>
+  </div>
+</section>
+
+<section class="bg-white shadow-xl rounded-3xl p-8 border border-gray-100">
+  <!-- Header -->
+  <div class="text-center mb-8">
+    <h2 class="text-3xl font-bold text-gray-800">Promo & Penawaran Khusus</h2>
+    <p class="text-gray-500 mt-2">Nikmati berbagai promo menarik untuk pelanggan setia kami</p>
+  </div>
+
+  <!-- Grid Promo -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Promo 1 -->
+    <div class="bg-gradient-to-br from-indigo-500 to-indigo-600 text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-bold">Diskon Servis 20%</h3>
+        <span class="bg-white text-indigo-600 text-xs font-semibold px-3 py-1 rounded-full">Hingga 30 Nov</span>
+      </div>
+      <p class="text-sm text-indigo-100 mt-3">Dapatkan potongan harga 20% untuk semua jenis servis bulan ini.</p>
+      <div class="mt-6 flex justify-between items-center">
+        <button class="bg-white text-indigo-600 px-4 py-2 rounded-xl font-semibold text-sm hover:bg-indigo-100 transition">
+          Gunakan Sekarang
+        </button>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Promo 2 -->
+    <div class="bg-gradient-to-br from-amber-400 to-yellow-500 text-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-bold">Paket Hemat Servis + Ganti Oli</h3>
+        <span class="bg-white/80 text-yellow-800 text-xs font-semibold px-3 py-1 rounded-full">Baru!</span>
+      </div>
+      <p class="text-sm mt-3 text-gray-800">Servis + ganti oli cuma Rp250.000. Hemat hingga Rp80.000!</p>
+      <div class="mt-6 flex justify-between items-center">
+        <button class="bg-yellow-600 text-white px-4 py-2 rounded-xl font-semibold text-sm hover:bg-yellow-700 transition">
+          Ambil Promo
+        </button>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-yellow-100 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m0-4h.01M12 20h9" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Promo 3 -->
+    <div class="bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-bold">Cashback e-Wallet 10%</h3>
+        <span class="bg-white text-green-700 text-xs font-semibold px-3 py-1 rounded-full">Gopay / Dana</span>
+      </div>
+      <p class="text-sm text-green-100 mt-3">Bayar via e-wallet & dapat cashback hingga Rp50.000!</p>
+      <div class="mt-6 flex justify-between items-center">
+        <button class="bg-white text-green-600 px-4 py-2 rounded-xl font-semibold text-sm hover:bg-green-100 transition">
+          Klaim Sekarang
+        </button>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3v18h18" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Promo 4 -->
+    <div class="bg-gradient-to-br from-pink-500 to-rose-600 text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-bold">Gratis Cuci Motor!</h3>
+        <span class="bg-white text-pink-600 text-xs font-semibold px-3 py-1 rounded-full">Untuk Member</span>
+      </div>
+      <p class="text-sm text-pink-100 mt-3">Setiap 3x servis di bulan yang sama, gratis 1x cuci motor.</p>
+      <div class="mt-6 flex justify-between items-center">
+        <button class="bg-white text-pink-600 px-4 py-2 rounded-xl font-semibold text-sm hover:bg-pink-100 transition">
+          Lihat Detail
+        </button>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Promo 5 -->
+    <div class="bg-gradient-to-br from-sky-400 to-blue-500 text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-bold">Promo Ganti Ban</h3>
+        <span class="bg-white text-blue-600 text-xs font-semibold px-3 py-1 rounded-full">Terbatas</span>
+      </div>
+      <p class="text-sm text-blue-100 mt-3">Beli 2 ban IRC / FDR dapat voucher servis Rp50.000.</p>
+      <div class="mt-6 flex justify-between items-center">
+        <button class="bg-white text-blue-600 px-4 py-2 rounded-xl font-semibold text-sm hover:bg-blue-100 transition">
+          Dapatkan Sekarang
+        </button>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gradient-to-b from-gray-50 to-white py-12 px-6 rounded-3xl shadow-xl border border-gray-100">
+  <!-- Header -->
+  <div class="text-center mb-10">
+    <h2 class="text-3xl font-bold text-gray-800">Testimoni Pelanggan</h2>
+    <p class="text-gray-500 mt-2">Pendapat mereka yang sudah merasakan pelayanan kami</p>
+  </div>
+
+  <!-- Container Slider -->
+  <div class="overflow-hidden relative">
+    <div id="testimonial-slider" class="flex transition-transform duration-500">
+      <!-- Testimoni 1 -->
+      <div class="min-w-full flex flex-col items-center px-6">
+        <div class="bg-white shadow-lg rounded-3xl p-6 max-w-lg text-center border border-gray-100">
+          <img src="https://images.unsplash.com/photo-1603570417039-3f5a87a62a3d" alt="motor" class="w-20 h-20 object-cover rounded-full mx-auto mb-4">
+          <h3 class="text-lg font-semibold text-gray-800">Ahmad Rizky</h3>
+          <p class="text-sm text-gray-500 mb-3">Honda Beat 2022</p>
+          <div class="flex justify-center mb-3">
+            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.45 1.286 3.957c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.37 2.45c-.785.57-1.84-.197-1.54-1.118l1.286-3.957-3.37-2.45c-.783-.57-.38-1.81.588-1.81h4.162L9.049 2.927z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.45 1.286 3.957c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.37 2.45c-.785.57-1.84-.197-1.54-1.118l1.286-3.957-3.37-2.45c-.783-.57-.38-1.81.588-1.81h4.162L9.049 2.927z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.45 1.286 3.957c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.37 2.45c-.785.57-1.84-.197-1.54-1.118l1.286-3.957-3.37-2.45c-.783-.57-.38-1.81.588-1.81h4.162L9.049 2.927z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.45 1.286 3.957c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.37 2.45c-.785.57-1.84-.197-1.54-1.118l1.286-3.957-3.37-2.45c-.783-.57-.38-1.81.588-1.81h4.162L9.049 2.927z"/></svg>
+            <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.45 1.286 3.957c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.37 2.45c-.785.57-1.84-.197-1.54-1.118l1.286-3.957-3.37-2.45c-.783-.57-.38-1.81.588-1.81h4.162L9.049 2.927z"/></svg>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed">"Pelayanannya cepat, mekaniknya ramah, dan harga transparan. Pasti balik lagi ke sini!"</p>
+        </div>
+      </div>
+
+      <!-- Testimoni 2 -->
+      <div class="min-w-full flex flex-col items-center px-6">
+        <div class="bg-white shadow-lg rounded-3xl p-6 max-w-lg text-center border border-gray-100">
+          <img src="https://images.unsplash.com/photo-1617814075410-dc449f5ef89b" alt="motor" class="w-20 h-20 object-cover rounded-full mx-auto mb-4">
+          <h3 class="text-lg font-semibold text-gray-800">Siti Marlina</h3>
+          <p class="text-sm text-gray-500 mb-3">Yamaha NMAX 2021</p>
+          <div class="flex justify-center mb-3">
+            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.45 1.286 3.957c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.37 2.45c-.785.57-1.84-.197-1.54-1.118l1.286-3.957-3.37-2.45c-.783-.57-.38-1.81.588-1.81h4.162L9.049 2.927z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.45 1.286 3.957c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.37 2.45c-.785.57-1.84-.197-1.54-1.118l1.286-3.957-3.37-2.45c-.783-.57-.38-1.81.588-1.81h4.162L9.049 2.927z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.45 1.286 3.957c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.37 2.45c-.785.57-1.84-.197-1.54-1.118l1.286-3.957-3.37-2.45c-.783-.57-.38-1.81.588-1.81h4.162L9.049 2.927z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.45 1.286 3.957c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.37 2.45c-.785.57-1.84-.197-1.54-1.118l1.286-3.957-3.37-2.45c-.783-.57-.38-1.81.588-1.81h4.162L9.049 2.927z"/></svg>
+            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.45 1.286 3.957c.3.921-.755 1.688-1.54 1.118L10 13.347l-3.37 2.45c-.785.57-1.84-.197-1.54-1.118l1.286-3.957-3.37-2.45c-.783-.57-.38-1.81.588-1.81h4.162L9.049 2.927z"/></svg>
+          </div>
+          <p class="text-gray-600 text-sm leading-relaxed">"Booking online-nya mudah banget, tinggal pilih tanggal dan langsung dapat notifikasi WA!"</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tombol Navigasi -->
+    <div class="absolute inset-0 flex justify-between items-center">
+      <button onclick="prevSlide()" class="bg-white shadow-md p-3 rounded-full hover:bg-indigo-50 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <button onclick="nextSlide()" class="bg-white shadow-md p-3 rounded-full hover:bg-indigo-50 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Script Slider -->
+<script>
+  let currentSlide = 0;
+  const slides = document.getElementById("testimonial-slider");
+  const totalSlides = slides.children.length;
+
+  function showSlide(index) {
+    slides.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+  }
+</script>
+
+<section class="bg-gradient-to-b from-white to-gray-50 py-16 px-6 rounded-3xl shadow-inner">
+  <!-- Header -->
+  <div class="text-center mb-12">
+    <h2 class="text-3xl font-bold text-gray-800">Artikel & Edukasi Motor</h2>
+    <p class="text-gray-500 mt-2 text-lg">Tips perawatan motor, panduan servis, dan info otomotif terbaru</p>
+  </div>
+
+  <!-- Grid Artikel -->
+  <div class="grid gap-8 md:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+    
+    <!-- Artikel 1 -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+      <img src="https://images.unsplash.com/photo-1628433529487-0d681ddedbd0" alt="artikel motor" class="h-48 w-full object-cover">
+      <div class="p-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2 hover:text-indigo-600 transition">Cara Merawat Motor Agar Tetap Irit & Awet</h3>
+        <p class="text-gray-600 text-sm mb-4">Pelajari cara menjaga performa motor agar tetap irit bahan bakar dan awet untuk pemakaian jangka panjang...</p>
+        <a href="#" class="inline-block text-indigo-600 text-sm font-semibold hover:text-indigo-800 transition">Baca Selengkapnya →</a>
+      </div>
+    </div>
+
+    <!-- Artikel 2 -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+      <img src="https://images.unsplash.com/photo-1615902621162-ec63d478bda2" alt="artikel servis motor" class="h-48 w-full object-cover">
+      <div class="p-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2 hover:text-indigo-600 transition">Kapan Waktu Terbaik untuk Servis Berkala?</h3>
+        <p class="text-gray-600 text-sm mb-4">Mengetahui waktu servis rutin bisa mencegah kerusakan besar dan menjaga mesin tetap prima setiap hari...</p>
+        <a href="#" class="inline-block text-indigo-600 text-sm font-semibold hover:text-indigo-800 transition">Baca Selengkapnya →</a>
+      </div>
+    </div>
+
+    <!-- Artikel 3 -->
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:-translate-y-2 transition-all duration-300 border border-gray-100">
+      <img src="https://images.unsplash.com/photo-1597004892120-9c401cfc8b38" alt="oli motor" class="h-48 w-full object-cover">
+      <div class="p-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-2 hover:text-indigo-600 transition">Cara Memilih Oli yang Tepat untuk Motor Anda</h3>
+        <p class="text-gray-600 text-sm mb-4">Tidak semua oli cocok untuk semua motor! Yuk, kenali jenis oli yang sesuai dengan tipe dan gaya berkendara...</p>
+        <a href="#" class="inline-block text-indigo-600 text-sm font-semibold hover:text-indigo-800 transition">Baca Selengkapnya →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Section Chat / Customer Service -->
+<section class="bg-gradient-to-r from-indigo-50 to-white py-16 px-6 rounded-3xl shadow-inner border border-gray-100">
+  <!-- Header -->
+  <div class="text-center mb-10">
+    <h2 class="text-3xl font-bold text-gray-800">Hubungi Kami</h2>
+    <p class="text-gray-500 mt-2 text-lg">Ada pertanyaan? Tim kami siap membantu Anda setiap hari!</p>
+  </div>
+
+  <!-- Grid Konten -->
+  <div class="grid md:grid-cols-2 gap-10">
+    
+    <!-- Form Chat -->
+    <div class="bg-white shadow-xl rounded-2xl p-8 border border-gray-100">
+      <h3 class="text-xl font-semibold text-gray-800 mb-4">Kirim Pesan Langsung</h3>
+      <form class="space-y-4">
+        <div>
+          <label class="text-gray-600 text-sm">Nama Lengkap</label>
+          <input type="text" placeholder="Masukkan nama Anda" class="w-full mt-1 p-3 border rounded-xl focus:ring-2 focus:ring-indigo-400 outline-none">
+        </div>
+        <div>
+          <label class="text-gray-600 text-sm">Nomor WhatsApp</label>
+          <input type="text" placeholder="Contoh: 0812-3456-7890" class="w-full mt-1 p-3 border rounded-xl focus:ring-2 focus:ring-indigo-400 outline-none">
+        </div>
+        <div>
+          <label class="text-gray-600 text-sm">Pesan Anda</label>
+          <textarea rows="4" placeholder="Tulis pertanyaan atau keluhan Anda..." class="w-full mt-1 p-3 border rounded-xl focus:ring-2 focus:ring-indigo-400 outline-none"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 text-white py-3 rounded-xl hover:bg-indigo-700 transition font-semibold">Kirim Pesan</button>
+      </form>
+    </div>
+
+    <!-- Info Kontak -->
+    <div class="flex flex-col justify-center">
+      <div class="space-y-4">
+        <div class="flex items-center space-x-4">
+          <div class="bg-indigo-100 p-3 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m6 14H3m6 2v-2m6-10H3m6-2v2m6 10v-2" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-gray-600 text-sm">Jam Operasional</p>
+            <p class="font-medium text-gray-800">Senin - Minggu, 08.00 - 18.00</p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <div class="bg-indigo-100 p-3 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 8l10 6 10-6" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-gray-600 text-sm">Email</p>
+            <p class="font-medium text-gray-800">bengkelkelotok@gmail.com</p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-4">
+          <div class="bg-indigo-100 p-3 rounded-full">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684L10.447 7H20a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V5z" />
+            </svg>
+          </div>
+          <div>
+            <p class="text-gray-600 text-sm">Alamat</p>
+            <p class="font-medium text-gray-800">Jl. Raya Kelotok No. 45, Kecamatan Sejahtera</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tombol Chat WhatsApp Floating -->
+<a href="https://wa.me/6281234567890" target="_blank" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-xl transition-all duration-300">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-7 w-7" viewBox="0 0 24 24">
+    <path d="M20.52 3.48A11.74 11.74 0 0012 0a11.74 11.74 0 00-8.52 3.48A11.74 11.74 0 000 12a11.74 11.74 0 003.48 8.52A11.74 11.74 0 0012 24a11.74 11.74 0 008.52-3.48A11.74 11.74 0 0024 12a11.74 11.74 0 00-3.48-8.52zM12 21.6a9.6 9.6 0 01-5.1-1.5l-.36-.21-3.63.96.97-3.54-.23-.36A9.6 9.6 0 1121.6 12 9.6 9.6 0 0112 21.6zm5.44-7.17c-.3-.15-1.77-.88-2.04-.98-.27-.1-.46-.15-.65.15-.2.3-.75.98-.91 1.18-.17.2-.34.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.47-1.77-1.64-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.34.45-.51.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.65-1.56-.89-2.14-.23-.55-.47-.47-.65-.48h-.56c-.2 0-.52.07-.8.37-.27.3-1.05 1.03-1.05 2.5s1.08 2.9 1.23 3.1c.15.2 2.13 3.26 5.16 4.57 3.02 1.3 3.64.87 4.29.82.65-.05 2.13-.87 2.43-1.71.3-.84.3-1.56.22-1.71-.07-.15-.27-.22-.57-.37z"/>
+  </svg>
+</a>
+
+<section class="bg-gradient-to-b from-gray-50 to-white py-16 px-6 rounded-3xl shadow-lg border border-gray-100">
+  <!-- Header -->
+  <div class="text-center mb-10">
+    <h2 class="text-3xl font-bold text-gray-800">Cek Antrian Servis</h2>
+    <p class="text-gray-500 mt-2 text-lg">Pantau status servis motor Anda secara real-time 🔧</p>
+  </div>
+
+  <!-- Table Container -->
+  <div class="overflow-x-auto bg-white rounded-2xl shadow-xl border border-gray-100">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-indigo-600 text-white">
+        <tr>
+          <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">No Antrian</th>
+          <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">Nama Pelanggan</th>
+          <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">Motor</th>
+          <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">Status</th>
+          <th class="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">Estimasi Selesai</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-100">
+        <tr class="hover:bg-gray-50 transition">
+          <td class="px-6 py-4 text-gray-700 font-semibold">A001</td>
+          <td class="px-6 py-4 text-gray-700">Budi Santoso</td>
+          <td class="px-6 py-4 text-gray-700">Honda Beat</td>
+          <td class="px-6 py-4">
+            <span class="px-3 py-1 bg-green-100 text-green-700 text-sm font-semibold rounded-full">Selesai</span>
+          </td>
+          <td class="px-6 py-4 text-gray-600">15:30</td>
+        </tr>
+        <tr class="hover:bg-gray-50 transition">
+          <td class="px-6 py-4 text-gray-700 font-semibold">A002</td>
+          <td class="px-6 py-4 text-gray-700">Siti Marlina</td>
+          <td class="px-6 py-4 text-gray-700">Yamaha NMAX</td>
+          <td class="px-6 py-4">
+            <span class="px-3 py-1 bg-yellow-100 text-yellow-700 text-sm font-semibold rounded-full">Dalam Pengerjaan</span>
+          </td>
+          <td class="px-6 py-4 text-gray-600">16:00</td>
+        </tr>
+        <tr class="hover:bg-gray-50 transition">
+          <td class="px-6 py-4 text-gray-700 font-semibold">A003</td>
+          <td class="px-6 py-4 text-gray-700">Agus Setiawan</td>
+          <td class="px-6 py-4 text-gray-700">Suzuki Satria</td>
+          <td class="px-6 py-4">
+            <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-semibold rounded-full">Menunggu</span>
+          </td>
+          <td class="px-6 py-4 text-gray-600">16:30</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+ 
+</section>
+
+<!-- Script Refresh Simulasi -->
+<script>
+  function refreshQueue() {
+    alert("Data antrian diperbarui secara real-time ✅");
+  }
+</script>
+
+
+<section class="max-w-7xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Daftar Pelanggan</h1>
+  <div class="overflow-x-auto">
+    <table class="w-full border border-gray-200 rounded">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-4 py-2 border-b">No</th>
+          <th class="px-4 py-2 border-b">Nama</th>
+          <th class="px-4 py-2 border-b">Motor</th>
+          <th class="px-4 py-2 border-b">No. HP</th>
+          <th class="px-4 py-2 border-b">Alamat</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-2 border-b">1</td>
+          <td class="px-4 py-2 border-b">Rudi Santoso</td>
+          <td class="px-4 py-2 border-b">Honda Beat</td>
+          <td class="px-4 py-2 border-b">08123456789</td>
+          <td class="px-4 py-2 border-b">Jakarta</td>
+        </tr>
+        <tr class="hover:bg-gray-50">
+          <td class="px-4 py-2 border-b">2</td>
+          <td class="px-4 py-2 border-b">Siti Aminah</td>
+          <td class="px-4 py-2 border-b">Yamaha NMAX</td>
+          <td class="px-4 py-2 border-b">08198765432</td>
+          <td class="px-4 py-2 border-b">Bekasi</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<script>
+const btn = document.getElementById('menu-btn');
+const menu = document.getElementById('mobile-menu');
+btn.addEventListener('click', ()=>menu.classList.toggle('hidden'));
+function toggleDropdown(id){ document.getElementById(id).classList.toggle('hidden'); }
+</script>
+</body>
+</html>

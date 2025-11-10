@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sparepart — Dealer Motor</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900">
+
+<!-- Navbar -->
+<nav class="bg-white shadow-md">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex justify-between h-16 items-center">
+      <a href="index.html" class="text-2xl font-bold">Dealer Motor</a>
+      <div class="hidden md:flex space-x-4 items-center">
+        <a href="index.html" class="hover:text-blue-500">Dashboard</a>
+        <div class="relative">
+          <button onclick="toggleDropdown('servicesDropdown')" class="hover:text-blue-500 flex items-center">
+            Layanan
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="servicesDropdown" class="absolute left-0 mt-1 hidden bg-white border shadow-md rounded z-10">
+            <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Daftar Layanan</a>
+            <a href="services.html" class="block px-4 py-2 hover:bg-gray-100">Tambah Layanan</a>
+            <a href="promo.html" class="block px-4 py-2 hover:bg-gray-100">Promo & Paket</a>
+          </div>
+        </div>
+        <a href="booking.html" class="hover:text-blue-500">Booking</a>
+        <a href="spareparts.html" class="hover:text-blue-500">Sparepart</a>
+        <a href="customers.html" class="hover:text-blue-500">Pelanggan</a>
+        <a href="locations.html" class="hover:text-blue-500">Lokasi</a>
+        <a href="reports.html" class="hover:text-blue-500">Laporan</a>
+        <a href="settings.html" class="hover:text-blue-500">Pengaturan</a>
+      </div>
+      <div class="md:hidden">
+        <button id="menu-btn" class="focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+    <a href="index.html" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a>
+    <button onclick="toggleDropdown('mobileServices')" class="w-full text-left px-4 py-2 hover:bg-gray-100 flex justify-between items-center">
+      Layanan
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+      </svg>
+    </button>
+    <div id="mobileServices" class="hidden flex-col">
+      <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Daftar Layanan</a>
+      <a href="services.html" class="block px-8 py-2 hover:bg-gray-100">Tambah Layanan</a>
+      <a href="promo.html" class="block px-8 py-2 hover:bg-gray-100">Promo & Paket</a>
+    </div>
+    <a href="booking.html" class="block px-4 py-2 hover:bg-gray-100">Booking</a>
+    <a href="spareparts.html" class="block px-4 py-2 hover:bg-gray-100">Sparepart</a>
+    <a href="customers.html" class="block px-4 py-2 hover:bg-gray-100">Pelanggan</a>
+    <a href="locations.html" class="block px-4 py-2 hover:bg-gray-100">Lokasi</a>
+    <a href="reports.html" class="block px-4 py-2 hover:bg-gray-100">Laporan</a>
+    <a href="settings.html" class="block px-4 py-2 hover:bg-gray-100">Pengaturan</a>
+  </div>
+</nav>
+
+<section class="relative w-full bg-gray-900 text-white py-24 overflow-hidden">
+  <!-- Background Map -->
+  <div class="absolute inset-0">
+    <iframe 
+      class="w-full h-full opacity-30 blur-sm brightness-75"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.035099722855!2d112.62560237496463!3d-7.882356792125008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd629da5a28c8b1%3A0x9af0a63e0c2693a5!2sBengkel%20Motor!5e0!3m2!1sid!2sid!4v1709493012345!5m2!1sid!2sid"
+      allowfullscreen="" 
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <!-- Gradient Overlay -->
+  <div class="absolute inset-0 bg-gradient-to-br from-gray-900/90 via-gray-900/70 to-indigo-900/70 backdrop-blur-sm"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 container mx-auto px-6 lg:px-20 flex flex-col-reverse lg:flex-row items-center justify-between gap-12">
+
+    <!-- Info Card -->
+    <div class="bg-white/10 backdrop-blur-2xl rounded-3xl shadow-2xl border border-white/20 p-10 lg:w-1/2 transition hover:shadow-indigo-500/30">
+      <h2 class="text-4xl font-extrabold text-white mb-4">Lokasi Bengkel Motor Kelotok</h2>
+      <p class="text-gray-300 mb-8 text-lg leading-relaxed">Kunjungi kami di lokasi strategis yang mudah dijangkau dan nikmati layanan servis terbaik untuk motor kesayangan Anda.</p>
+      
+      <div class="space-y-5">
+        <div class="flex items-center gap-4">
+          <div class="bg-indigo-600 p-3 rounded-xl text-white text-xl">📍</div>
+          <p>Jl. Raya Kelotok No. 88, Kec. Mandiri, Kab. Karang Asri, Jawa Timur</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="bg-indigo-600 p-3 rounded-xl text-white text-xl">📞</div>
+          <p>0812-3456-7890</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="bg-indigo-600 p-3 rounded-xl text-white text-xl">✉️</div>
+          <p>bengkelkelotok@gmail.com</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="bg-indigo-600 p-3 rounded-xl text-white text-xl">🕒</div>
+          <p>Senin - Sabtu: 08.00 - 17.00<br>Minggu: Tutup</p>
+        </div>
+      </div>
+
+      <!-- Tombol -->
+      <div class="flex flex-wrap gap-5 mt-10">
+        <a href="https://goo.gl/maps" target="_blank"
+          class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-xl font-semibold text-white shadow-lg transition transform hover:scale-105">
+          🗺️ Lihat di Google Maps
+        </a>
+        <a href="https://wa.me/6281234567890" target="_blank"
+          class="flex items-center gap-2 bg-green-500 hover:bg-green-600 px-6 py-3 rounded-xl font-semibold text-white shadow-lg transition transform hover:scale-105">
+          💬 Hubungi via WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Highlight Stats -->
+    <div class="lg:w-1/2 text-center lg:text-right space-y-6">
+      <h3 class="text-5xl font-extrabold text-white drop-shadow-lg">Mudah Ditemukan,<br>Siap Melayani</h3>
+      <p class="text-gray-300 text-lg max-w-md lg:ml-auto">Berlokasi di pusat kota, bengkel kami selalu siap memberikan pengalaman servis cepat dan terpercaya.</p>
+      <div class="flex justify-center lg:justify-end gap-6 mt-6">
+        <div class="bg-white/10 border border-white/20 backdrop-blur-md px-6 py-4 rounded-2xl">
+          <p class="text-3xl font-bold text-yellow-400">+500</p>
+          <p class="text-sm text-gray-300">Servis per bulan</p>
+        </div>
+        <div class="bg-white/10 border border-white/20 backdrop-blur-md px-6 py-4 rounded-2xl">
+          <p class="text-3xl font-bold text-yellow-400">98%</p>
+          <p class="text-sm text-gray-300">Kepuasan pelanggan</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="max-w-7xl mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-6">Lokasi Dealer</h1>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <h2 class="font-semibold text-lg">Jakarta Pusat</h2>
+      <p class="text-gray-600 mt-2">Jl. Thamrin No.10</p>
+      <p class="text-gray-600">Telp: 021-123456</p>
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <h2 class="font-semibold text-lg">Bekasi</h2>
+      <p class="text-gray-600 mt-2">Jl. Raya Bekasi No.99</p>
+      <p class="text-gray-600">Telp: 021-987654</p>
+    </div>
+    <div class="bg-white p-4 rounded shadow hover:shadow-lg transition">
+      <h2 class="font-semibold text-lg">Tangerang</h2>
+      <p class="text-gray-600 mt-2">Jl. Sudirman No.55</p>
+      <p class="text-gray-600">Telp: 021-112233</p>
+    </div>
+  </div>
+</section>
+
+
+<script>
+const btn = document.getElementById('menu-btn');
+const menu = document.getElementById('mobile-menu');
+btn.addEventListener('click', ()=>menu.classList.toggle('hidden'));
+function toggleDropdown(id){ document.getElementById(id).classList.toggle('hidden'); }
+</script>
+</body>
+</html>
